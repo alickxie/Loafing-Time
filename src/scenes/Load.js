@@ -19,7 +19,7 @@ class Load extends Phaser.Scene {
 
         //load sounds
         this.load.path = './assets/audio/';
-        // this.load.audio('jump_music', 'jump.mp3');
+        this.load.audio('select_music', 'select.mp3');
     }
 
 

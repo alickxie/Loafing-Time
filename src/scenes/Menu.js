@@ -10,7 +10,7 @@ class Menu extends Phaser.Scene {
         //UI
         let menuConfig = {
             fontFamily: 'Pangolin',
-            fontSize: '175px',
+            fontSize: '130px',
             color: '#FFFF00',
             stroke: '#99BF0D',
             strokeThickness: 5,
@@ -31,7 +31,7 @@ class Menu extends Phaser.Scene {
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 
 
-        this.add.text(centerX, centerY -100, 'Slug Run!', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY -100, 'Loafing Time', menuConfig).setOrigin(0.5);
 
         let menu1Config = { fontFamily: 'Pangolin', fontSize: '50px', color: '#4040ff', stroke: '#FFFFFF', strokeThickness: 3, padding: { top: 5, bottom: 5, }, fixedWidth: 0 }
         this.add.text(centerX, centerY + 75, 'Press (SPACE) to Start', menu1Config).setOrigin(0.5);
@@ -43,15 +43,18 @@ class Menu extends Phaser.Scene {
 
     update() {
         //scroll the background
-        this.background.tilePositionX += 1;
+        // this.background.tilePositionX += 1;
 
         if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
+            this.sound.play("select_music", { volume: 2.0 });
             this.scene.start("playScene");
         }
         if(Phaser.Input.Keyboard.JustDown(keyW)){
+            this.sound.play("select_music", { volume: 2.0 });
             this.scene.start("instruScene");
         }
         if(Phaser.Input.Keyboard.JustDown(keyS)){
+            this.sound.play("select_music", { volume: 2.0 });
             this.scene.start("creditScene");
         }
 

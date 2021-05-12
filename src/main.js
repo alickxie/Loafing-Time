@@ -40,3 +40,5 @@ let keySPACE, keyUP, keyDOWN, keyF, keyR, keyQ, keyA, keyD, keyS, keyW;
 // }
 
 // define globals
+let centerX = game.config.width / 2;
+let centerY = game.config.height / 2;

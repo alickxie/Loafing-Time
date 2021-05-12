@@ -6,7 +6,7 @@ class Instru extends Phaser.Scene{
 
     create(){
         //place background
-        this.background = this.add.tileSprite(0, 0, 800, 480, 'forest').setOrigin(0.0);
+        // this.background = this.add.tileSprite(0, 0, 800, 480, 'forest').setOrigin(0.0);
         //UI and text
         let instruConfig = {
             color: '#000000',
@@ -46,15 +46,15 @@ class Instru extends Phaser.Scene{
         this.add.text(centerX, centerY+110, 'Mouse to aim, (Left Button) to shoot', credit2Config).setOrigin(0.5);
         
         //type space to play
-        this.add.text(centerX, 420, '[ Press (D) to Next Page]', creditConfig).setOrigin(0.5);
-        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.add.text(centerX, 420, '[ Press (Space) to the Menu]', creditConfig).setOrigin(0.5);
+        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
     update(){
         //scroll the background
-        this.background.tilePositionX += 1;
+        // this.background.tilePositionX += 1;
 
-        if(Phaser.Input.Keyboard.JustDown(keyD)){
+        if(Phaser.Input.Keyboard.JustDown(keySPACE)){
             this.sound.play("select_music", { volume: 2.0 });
             this.scene.start("menuScene");
         }
