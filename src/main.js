@@ -11,8 +11,8 @@ Gmae Title:
 
 let config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 480,
+    width: 1280,
+    height: 720,
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },

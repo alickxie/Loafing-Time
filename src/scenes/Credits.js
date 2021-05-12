@@ -10,13 +10,13 @@ class Credits extends Phaser.Scene{
         let titleConfig = {
             fontFamily: 'Pangolin',
             fontSize: '32px',
-            color: '#000000',
+            color: '#FFFFFF',
             align: 'right',
         }
         let text1Config = {
             fontFamily: 'Pangolin',
             fontSize: '24px',
-            color: '#000000',
+            color: '#FFFFFF',
             align: 'right',
         }
         let creditConfig = {
