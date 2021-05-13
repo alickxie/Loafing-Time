@@ -1,6 +1,6 @@
-class Play extends Phaser.Scene {
+class GameOver extends Phaser.Scene {
     constructor() {
-        super("playScene");
+        super("GameOver");
     }
 
     create() {
@@ -15,6 +15,7 @@ class Play extends Phaser.Scene {
         }
 
         this.add.text(centerX, 420, '[ Press (Space) to the Menu]', creditConfig).setOrigin(0.5);
+        this.add.text(centerX, 400, '[ Press (R) to the restart this game]', creditConfig).setOrigin(0.5);
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     }

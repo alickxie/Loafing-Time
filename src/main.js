@@ -25,14 +25,14 @@ let config = {
             }
         }
     },
-    scene: [Load, Menu, Play, Credits, Instru]
+    scene: [Load, Menu, Play, Credits, GameOver]
 };
 
 let game = new Phaser.Game(config);
 
 //reserve keyboard variables
 let keySPACE, keyUP, keyDOWN, keyF, keyR, keyQ, keyA, keyD, keyS, keyW;
-
+let input;
 //define Game Settings
 // game.settings = {
 //     initialLevel: 0,
@@ -42,7 +42,7 @@ let keySPACE, keyUP, keyDOWN, keyF, keyR, keyQ, keyA, keyD, keyS, keyW;
 // define globals
 let centerX = game.config.width / 2;
 let centerY = game.config.height / 2;
-
+let time;
 let Score;
 let gameStatus;
 let completeness;

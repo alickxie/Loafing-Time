@@ -4,11 +4,52 @@ class Load extends Phaser.Scene {
     }
 
     preload() {
+
+        var progressBar = this.add.graphics();
+        var progressBox = this.add.graphics();
+        progressBar.x = 240;
+        progressBox.x = 240;
+        progressBar.y = 80;
+        progressBox.y = 80;
+        progressBox.fillStyle(0x222222, 0.8);
+        progressBox.fillRect(240, 270, 320, 50);
+
+        var width = game.config.width;
+        var height = game.config.height;
+        var loadingText = this.make.text({
+            x: width / 2,
+            y: height / 2 - 50,
+            text: 'Loading...', 
+            style: {
+                font: '20px monospace',
+                fill: '#ffffff'
+            }
+        });
+        loadingText.setOrigin(0.5, 0.5);
+
+        
+        this.load.on('progress', function (value) {
+            progressBar.clear();
+            progressBar.fillStyle(0xffffff, 1);
+            progressBar.fillRect(250, 280, 300 * value, 30);
+        });
+
+        this.load.on('complete', function () {
+            progressBar.destroy();
+            progressBox.destroy();
+            loadingText.destroy();
+        });
         //load imgs
-        this.load.path = './assets/img/';
-        // this.load.image([
-        //     // { key: 'ground' },
-        // ]);
+        this.load.path = './assets/image/';
+        this.load.image('WorkArea', 'WorkArea.png');
+        this.load.image([
+            // { key: 'WorkArea' },
+            { key: 'game-screen' },
+            { key: 'work-screen' },
+            { key: 'watching-colleague' },
+            { key: 'angry-colleague' }
+
+        ]);
 
         // this.load.spritesheet('anims_fox', 'anims_fox.png', {
         //     frameWidth: 112.5,
