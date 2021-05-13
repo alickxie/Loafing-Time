@@ -1,11 +1,11 @@
 /*
 Group Member:
-    Larry Li
-    Yufeng Xie
-    Jiaying Hou
+    Larry Li
+    Yufeng Xie
+    Jiaying Hou
 
 Gmae Title:
-    Loafing Time
+    Loafing Time
 
 */
 

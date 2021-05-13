@@ -8,7 +8,7 @@ class GameOver extends Phaser.Scene {
             color: '#CD00CD',
             fontFamily: 'Pangolin',
             fontSize: '22px',
-            stroke: '#FFFFFF', 
+            stroke: '#FFFFFF',
             strokeThickness: 3,
             align: 'left',
             fixedWidth: 0,
@@ -16,16 +16,16 @@ class GameOver extends Phaser.Scene {
 
         this.add.text(centerX, 420, '[ Press (Space) to the Menu]', creditConfig).setOrigin(0.5);
         this.add.text(centerX, 400, '[ Press (R) to the restart this game]', creditConfig).setOrigin(0.5);
-        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     }
 
     update() {
-        if(Phaser.Input.Keyboard.JustDown(keySPACE)){
+        if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
             this.sound.play("select_music", { volume: 2.0 });
             this.scene.start("menuScene");
         }
-        if(Phaser.Input.Keyboard.JustDown(keyR)){
+        if (Phaser.Input.Keyboard.JustDown(keyR)) {
             this.sound.play("select_music", { volume: 2.0 });
             this.scene.start(currentScene);
         }

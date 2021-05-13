@@ -1,10 +1,10 @@
-class Instru extends Phaser.Scene{
-    constructor(){
+class Instru extends Phaser.Scene {
+    constructor() {
         super("instruScene");
     }
-    
 
-    create(){
+
+    create() {
         //place background
         // this.background = this.add.tileSprite(0, 0, 800, 480, 'forest').setOrigin(0.0);
         //UI and text
@@ -12,7 +12,7 @@ class Instru extends Phaser.Scene{
             color: '#000000',
             fontFamily: 'Pangolin',
             fontSize: '42px',
-            stroke: '#FFFFFF', 
+            stroke: '#FFFFFF',
             strokeThickness: 3,
             align: 'left',
             fixedWidth: 0,
@@ -21,7 +21,7 @@ class Instru extends Phaser.Scene{
             color: '#CD00CD',
             fontFamily: 'Pangolin',
             fontSize: '22px',
-            stroke: '#FFFFFF', 
+            stroke: '#FFFFFF',
             strokeThickness: 3,
             align: 'left',
             fixedWidth: 0,
@@ -31,30 +31,30 @@ class Instru extends Phaser.Scene{
             color: '#000000',
             fontFamily: 'Pangolin',
             fontSize: '24px',
-            stroke: '#FFFFFF', 
+            stroke: '#FFFFFF',
             strokeThickness: 3,
             align: 'left',
             fixedWidth: 0,
         }
         //add instructions
-        let menu1Config = { fontFamily: 'Pangolin', fontSize: '50px', color: '#ffff00', stroke: '#000000', strokeThickness: 3, padding: { top: 5, bottom: 5, }, fixedWidth: 0 }
-        this.add.text(centerX, centerY -140, 'Hey Slug, Ready to See the World?', menu1Config).setOrigin(0.5);
+        let menu1Config = { fontFamily: 'Pangolin', fontSize: '50px', color: '#ffff00', stroke: '#000000', strokeThickness: 3, padding: { top: 5, bottom: 5, }, fixedWidth: 0 }
+        this.add.text(centerX, centerY - 140, 'Hey Slug, Ready to See the World?', menu1Config).setOrigin(0.5);
 
-        this.add.text(centerX, centerY-30, 'Instruction', instruConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY+30, '(A) & (D) to Move, (S) to Crouch, (Space) to Jump', credit2Config).setOrigin(0.5);
-        this.add.text(centerX, centerY+70, '(Space)x2 to Double Jump', credit2Config).setOrigin(0.5);
-        this.add.text(centerX, centerY+110, 'Mouse to aim, (Left Button) to shoot', credit2Config).setOrigin(0.5);
-        
+        this.add.text(centerX, centerY - 30, 'Instruction', instruConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY + 30, '(A) & (D) to Move, (S) to Crouch, (Space) to Jump', credit2Config).setOrigin(0.5);
+        this.add.text(centerX, centerY + 70, '(Space)x2 to Double Jump', credit2Config).setOrigin(0.5);
+        this.add.text(centerX, centerY + 110, 'Mouse to aim, (Left Button) to shoot', credit2Config).setOrigin(0.5);
+
         //type space to play
         this.add.text(centerX, 420, '[ Press (Space) to the Menu]', creditConfig).setOrigin(0.5);
-        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
-    update(){
+    update() {
         //scroll the background
         // this.background.tilePositionX += 1;
 
-        if(Phaser.Input.Keyboard.JustDown(keySPACE)){
+        if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
             this.sound.play("select_music", { volume: 2.0 });
             this.scene.start("menuScene");
         }

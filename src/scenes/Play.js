@@ -40,8 +40,8 @@ class Play extends Phaser.Scene {
     }
 
     update() {
-        if(this.mouse.isDown){
-            console.log("x: ",this.input.x,"y: ",this.input.y);
+        if (this.mouse.isDown) {
+            console.log("x: ", this.input.x, "y: ", this.input.y);
         }
         if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
             playGame = true;
@@ -50,7 +50,7 @@ class Play extends Phaser.Scene {
             playGame = false;
             console.log(playGame);
         }
-        if(Score<1){
+        if (Score < 1) {
             this.scene.start("GameOver");
         }
         if (playGame == true) {
@@ -69,7 +69,7 @@ class Play extends Phaser.Scene {
                 time -= 100;
                 this.Bar.clear();
                 this.Bar.fillStyle(0x00ff00, 1);
-                this.Bar.fillRect(250, 80, 3 * Score, 30);  
+                this.Bar.fillRect(250, 80, 3 * Score, 30);
                 console.log(Score);
             }
         }

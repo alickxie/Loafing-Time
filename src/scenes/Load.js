@@ -19,7 +19,7 @@ class Load extends Phaser.Scene {
         var loadingText = this.make.text({
             x: width / 2,
             y: height / 2 - 50,
-            text: 'Loading...', 
+            text: 'Loading...',
             style: {
                 font: '20px monospace',
                 fill: '#ffffff'
@@ -27,7 +27,7 @@ class Load extends Phaser.Scene {
         });
         loadingText.setOrigin(0.5, 0.5);
 
-        
+
         this.load.on('progress', function (value) {
             progressBar.clear();
             progressBar.fillStyle(0xffffff, 1);
