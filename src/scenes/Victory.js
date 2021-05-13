@@ -1,6 +1,6 @@
-class GameOver extends Phaser.Scene {
+class Victory extends Phaser.Scene {
     constructor() {
-        super("GameOver");
+        super("Victory");
     }
 
     create() {
@@ -16,6 +16,16 @@ class GameOver extends Phaser.Scene {
 
         this.add.text(centerX, 420, '[ Press (Space) to the Menu]', creditConfig).setOrigin(0.5);
         this.add.text(centerX, 400, '[ Press (R) to the restart this game]', creditConfig).setOrigin(0.5);
+        creditConfig = {
+            color: '#CD00CD',
+            fontFamily: 'Pangolin',
+            fontSize: '50px',
+            stroke: '#FFFFFF',
+            strokeThickness: 3,
+            align: 'left',
+            fixedWidth: 0,
+        }
+        this.add.text(centerX, 300, '[ Victory! ]', creditConfig).setOrigin(0.5);
         keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     }

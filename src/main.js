@@ -25,13 +25,13 @@ let config = {
             }
         }
     },
-    scene: [Load, Menu, Play, Credits, GameOver]
+    scene: [Load, Menu, Play, Credits, GameOver, Victory]
 };
 
 let game = new Phaser.Game(config);
 
 //reserve keyboard variables
-let keySPACE, keyUP, keyDOWN, keyF, keyR, keyQ, keyA, keyD, keyS, keyW;
+let keySPACE, keyUP, keyDOWN, keyF, keyR, keyQ, keyA, keyD, keyS, keyW, keyM;
 let input;
 //define Game Settings
 // game.settings = {
@@ -50,3 +50,4 @@ let completeness;
 let playGame;
 let watch;
 let currentScene;
+let randomNum;

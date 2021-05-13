@@ -61,6 +61,10 @@ class Load extends Phaser.Scene {
         //load sounds
         this.load.path = './assets/audio/';
         this.load.audio('select_music', 'select.mp3');
+        this.load.audio('whatrudoing', 'whatrudoing.mp3');
+        this.load.audio('wuuut', 'wuuut.mp3');
+        this.load.audio('bgm', 'jiaying330 - slug.mp3');
+        this.load.audio('workBgm', 'workBgm.mp3');
     }
 
 
