@@ -14,7 +14,7 @@ class Victory extends Phaser.Scene {
             fixedWidth: 0,
         }
 
-        this.add.text(centerX, 420, '[ Press (Space) to the Menu]', creditConfig).setOrigin(0.5);
+        this.add.text(centerX, 420, '[ Press (M) to the Menu]', creditConfig).setOrigin(0.5);
         this.add.text(centerX, 400, '[ Press (R) to the restart this game]', creditConfig).setOrigin(0.5);
         creditConfig = {
             color: '#CD00CD',
