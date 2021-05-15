@@ -39,6 +39,9 @@ class Menu extends Phaser.Scene {
         menu1Config = { fontFamily: 'Pangolin', fontSize: '30px', color: '#000000', stroke: '#FFFFFF', strokeThickness: 3, padding: { top: 5, bottom: 5, }, fixedWidth: 0 }
         this.add.text(centerX, centerY + 170, 'Press (W) for Instruction', menu1Config).setOrigin(0.5);
         this.add.text(centerX, centerY + 210, 'Press (S) for Credit', menu1Config).setOrigin(0.5);
+
+        menu1Config = { fontFamily: 'Pangolin', fontSize: '20px', color: '#000000', stroke: '#FFFFFF', strokeThickness: 3, padding: { top: 5, bottom: 5, }, fixedWidth: 0 }
+        this.add.text(centerX, centerY + 340, 'Test Version (1.0)', menu1Config).setOrigin(0.5);
     }
 
     update() {

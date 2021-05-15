@@ -38,23 +38,25 @@ class Instru extends Phaser.Scene {
         }
         //add instructions
         let menu1Config = { fontFamily: 'Pangolin', fontSize: '50px', color: '#ffff00', stroke: '#000000', strokeThickness: 3, padding: { top: 5, bottom: 5, }, fixedWidth: 0 }
-        this.add.text(centerX, centerY - 140, 'Hey Slug, Ready to See the World?', menu1Config).setOrigin(0.5);
+        this.add.text(centerX, centerY - 200, 'Its Loafing Time!', menu1Config).setOrigin(0.5);
 
-        this.add.text(centerX, centerY - 30, 'Instruction', instruConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY + 30, '(A) & (D) to Move, (S) to Crouch, (Space) to Jump', credit2Config).setOrigin(0.5);
-        this.add.text(centerX, centerY + 70, '(Space)x2 to Double Jump', credit2Config).setOrigin(0.5);
-        this.add.text(centerX, centerY + 110, 'Mouse to aim, (Left Button) to shoot', credit2Config).setOrigin(0.5);
+        this.add.text(centerX, centerY - 100, 'Control: ', instruConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY - 50, 'Hold (Space) to play "game"', credit2Config).setOrigin(0.5);
+        this.add.text(centerX, centerY , 'Release (Space) to work', credit2Config).setOrigin(0.5);
+
+        this.add.text(centerX, centerY + 80, 'Goal:', instruConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY + 120, 'Avoid being catach while playing game at work.', credit2Config).setOrigin(0.5);
 
         //type space to play
-        this.add.text(centerX, 420, '[ Press (Space) to the Menu]', creditConfig).setOrigin(0.5);
-        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.add.text(centerX, centerY + 220, '[ Press (M) to the Menu]', creditConfig).setOrigin(0.5);
+        keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
     }
 
     update() {
         //scroll the background
         // this.background.tilePositionX += 1;
 
-        if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
+        if (Phaser.Input.Keyboard.JustDown(keyM)) {
             this.sound.play("select_music", { volume: 2.0 });
             this.scene.start("menuScene");
         }

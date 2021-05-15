@@ -31,31 +31,31 @@ class Credits extends Phaser.Scene {
 
 
         //add credits
-        this.add.text(centerX, centerY - 220, 'Game Designer:', titleConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY - 180, 'Yufeng Xie,  Larry Li,  Jiaying Hou', text1Config).setOrigin(0.5);
+        this.add.text(centerX, centerY - 230, 'Game Designer:', titleConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY - 190, 'Yufeng Xie,  Larry Li,  Jiaying Hou', text1Config).setOrigin(0.5);
 
-        this.add.text(centerX, centerY / 3 + 30, 'Programmer:', titleConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY / 3 + 70, 'Yufeng Xie,  Larry Li', text1Config).setOrigin(0.5);
+        this.add.text(centerX, centerY -130, 'Programmer:', titleConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY -90, 'Yufeng Xie,  Larry Li', text1Config).setOrigin(0.5);
 
-        this.add.text(centerX, centerY - 40, 'Sound Effect:', titleConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY, 'Larry Li', text1Config).setOrigin(0.5);
+        this.add.text(centerX, centerY - 30, 'Sound Effect:', titleConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY + 10, 'Larry Li', text1Config).setOrigin(0.5);
 
-        this.add.text(centerX, centerY + 45, 'Art:', titleConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY + 85, 'Jiaying Hou', text1Config).setOrigin(0.5);
+        this.add.text(centerX, centerY + 70, 'Art:', titleConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY + 110, 'Jiaying Hou, Yufeng Xie', text1Config).setOrigin(0.5);
 
-        this.add.text(centerX, centerY + 130, 'Music:', titleConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY + 170, 'Jiaying Hou', text1Config).setOrigin(0.5);
+        this.add.text(centerX, centerY + 170, 'Music:', titleConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY + 210, 'Jiaying Hou', text1Config).setOrigin(0.5);
 
         //type space to play
-        this.add.text(centerX, centerY + 210, '[ Press (SPACE) to Return ]', creditConfig).setOrigin(0.5);
-        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.add.text(centerX, centerY + 280, '[ Press (M) to Return ]', creditConfig).setOrigin(0.5);
+        keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
     }
 
     update() {
         //scroll the background
         // this.background.tilePositionX += 1;
 
-        if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
+        if (Phaser.Input.Keyboard.JustDown(keyM)) {
             this.sound.play("select_music", { volume: 2.0 });
             this.scene.start("menuScene");
         }

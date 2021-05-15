@@ -6,7 +6,6 @@ Group Member:
 
 Gmae Title:
     Loafing Time
-
 */
 
 let config = {
@@ -25,7 +24,7 @@ let config = {
             }
         }
     },
-    scene: [Load, Menu, Play, Credits, GameOver, Victory]
+    scene: [Load, Menu, Play, Credits, Instru, GameOver, Victory]
 };
 
 let game = new Phaser.Game(config);

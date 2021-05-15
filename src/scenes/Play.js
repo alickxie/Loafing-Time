@@ -16,11 +16,13 @@ class Play extends Phaser.Scene {
         currentScene = "playScene";
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
+        // The random number used to generate collegaues
         this.random = Math.floor(Math.random() * 10);
 
         // Create the background work area
-        this.background = this.add.sprite(0, 0, 'WorkArea').setOrigin(0.0);
+        this.background = this.add.sprite(1, 0, 'WorkArea').setScale(1.01).setOrigin(0.0);
         this.backgroundMusic = this.sound.add('workBgm', { mute: false, volume: 0.5, rate: 1, loop: true });
+
         // This is the progress bar
         this.Box = this.add.graphics();
         this.Bar = this.add.graphics();
@@ -29,10 +31,10 @@ class Play extends Phaser.Scene {
         this.Bar.y = 80;
         this.Box.y = 80;
         this.Box.fillStyle(0x222222, 0.8);
-        this.Box.fillRect(240, 70, 320, 50);
+        this.Box.fillRect(255, 70, 320, 50);
 
         // Add the sanity text to the scene
-        this.SanityText = this.add.text(525, 40, `Sanity: ${sanity} / 100`, {
+        this.SanityText = this.add.text(535, 40, `Sanity: ${sanity} / 100`, {
             fontFamily: 'Pangolin',
             fontSize: '30px',
             color: '#FF0000 ',
@@ -41,11 +43,11 @@ class Play extends Phaser.Scene {
         });
 
         // Create trun around collegaue in the scene
-        this.colleague = this.add.sprite(604, 297, 'watching-colleague').setOrigin(0.0);
+        this.colleague = this.add.sprite(611, 300, 'watching-colleague').setOrigin(0.0);
         this.colleague.setAlpha(0.0);
 
         // Create the working computer screen on the scene
-        this.computerScreen = this.add.sprite(506, 435, 'work-screen').setOrigin(0.0);
+        this.computerScreen = this.add.sprite(514, 441, 'work-screen').setOrigin(0.0);
 
         // The mouse input
         this.mouse = this.input.mousePointer;
@@ -64,17 +66,18 @@ class Play extends Phaser.Scene {
         // });
         // loadingText.setOrigin(0.5, 0.5);
 
+        // The looping timer to call out the collegaue checking event
         this.difficultyTimer = this.time.addEvent({
             delay: 1000,
             callback: this.rando,
             callbackScope: this,
             loop: true
         });
-
     }
 
+    // rando function to get random number from (0-9)
     rando() {
-            randomNum = Math.floor(Math.random() * 10);
+        randomNum = Math.floor(Math.random() * 10);
     }
 
     update() {
@@ -85,7 +88,6 @@ class Play extends Phaser.Scene {
         }
 
         // Game Loop
-
         if (gameStatus == true && gameScore < 100) {
             // Check if user press SPACE to play the game or not
             if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
@@ -115,33 +117,34 @@ class Play extends Phaser.Scene {
             }
 
             // When playgame is true, increase the progress bar, else
-            // decrease the progress bar.
+            // decrease the sanity value
             if (playGame == true) {
                 time++;
                 if (time >= 100) {
-                    gameScore += 3;
+                    gameScore += 2;
                     time -= 100;
                     this.Bar.fillStyle(0x00ff00, 1);
-                    this.Bar.fillRect(250, 80, 3 * gameScore, 30);
+                    this.Bar.fillRect(260, 80, 3 * gameScore, 30);
                     console.log(gameScore);
                 }
             } else {
                 time++;
                 if (time >= 100) {
-                    sanity -= 1;
+                    sanity -= 3;
                     time -= 100;
                     this.SanityText.setText('Sanity: ' + sanity + ' / 100');
                     console.log(gameScore);
                 }
             }
 
+            // When we get a random number 5, we get the collegaue checking event
             if (randomNum == 5) {
                 randomNum = 0;
                 this.sound.play("whatrudoing", { volume: 0.5 });
                 this.colleague.setAlpha(1.0);
-              
 
-                this.clock = this.time.delayedCall(500, () => {
+
+                this.clock = this.time.delayedCall(400, () => {
                     watch = true;
                 }, null, this);
 
@@ -153,6 +156,8 @@ class Play extends Phaser.Scene {
                 }, null, this);
             }
 
+            // If player failed to release (Space) in 0.5s, when collegaue
+            // is checking, then gameover.
             if (playGame == true && watch == true) {
                 this.sound.play("wuuut", { volume: 0.7 });
                 this.colleague.setTexture('angry-colleague');
@@ -163,21 +168,10 @@ class Play extends Phaser.Scene {
                     this.scene.start("GameOver");
                 }, null, this);
             }
-
-        }else if (gameScore >= 100) {
+            // Player win the game 
+        } else if (gameScore >= 100) {
             this.backgroundMusic.stop();
             this.scene.start("Victory");
         }
-
-        // // This is the checking condition for watching collegaue.
-        // if (playGame == true) {
-        //     this.clock = this.time.delayedCall(1900, () => {
-        //         if (watch == true) {
-        //             this.colleague.setTexture('angry-colleague');
-        //             gameStatus = false;
-        //             this.scene.start("GameOver");
-        //         }
-        //     }, null, this);
-        // }
     }
 }

@@ -14,8 +14,9 @@ class Victory extends Phaser.Scene {
             fixedWidth: 0,
         }
 
-        this.add.text(centerX, 420, '[ Press (M) to the Menu]', creditConfig).setOrigin(0.5);
-        this.add.text(centerX, 400, '[ Press (R) to the restart this game]', creditConfig).setOrigin(0.5);
+        this.add.text(centerX, 420, '[ Press (M) to Menu]', creditConfig).setOrigin(0.5);
+        this.add.text(centerX, 380, '[ Press (R) for Retry]', creditConfig).setOrigin(0.5);
+
         creditConfig = {
             color: '#CD00CD',
             fontFamily: 'Pangolin',
@@ -26,6 +27,7 @@ class Victory extends Phaser.Scene {
             fixedWidth: 0,
         }
         this.add.text(centerX, 300, '[ Victory! ]', creditConfig).setOrigin(0.5);
+
         keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     }
