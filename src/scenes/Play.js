@@ -144,7 +144,7 @@ class Play extends Phaser.Scene {
                 this.colleague.setAlpha(1.0);
 
 
-                this.clock = this.time.delayedCall(400, () => {
+                this.clock = this.time.delayedCall(450, () => {
                     watch = true;
                 }, null, this);
 
