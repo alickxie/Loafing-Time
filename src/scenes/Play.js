@@ -15,9 +15,16 @@ class Play extends Phaser.Scene {
         time = 0;
         currentScene = "playScene";
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
+        this.temp = 1;
         // The random number used to generate collegaues
         this.random = Math.floor(Math.random() * 10);
+
+        this.boss = new Boss(this,0);
+        
+        // while(this.boss.positionX>=45 && this.boss.positionY<=553){
+        //     this.boss.positionX += 1;
+        //     this.boos.positionY -= 2.8;
+        // }
 
         // Create the background work area
         this.background = this.add.sprite(5, 0, 'WorkArea').setOrigin(0.0);
@@ -79,8 +86,37 @@ class Play extends Phaser.Scene {
     rando() {
         randomNum = Math.floor(Math.random() * 10);
     }
+    
 
     update() {
+        if(this.boss.x>=50 && this.boss.walking ==true){
+            this.boss.x -= 0.8;
+            this.boss.y += 0.5;
+            this.temp += 0.005;
+            this.boss.setScale(this.temp);
+        }else{
+            this.boss.flipX=true;
+            if(this.boss.x==50){
+                this.boss.watch =true;
+            }else{
+                this.boss.watch =false;
+            }
+            this.clock = this.time.delayedCall(300, () => {
+                if(this.boss.watch==true && playGame==true){
+                    this.backgroundMusic.stop();
+                    this.scene.start("GameOver");
+                }
+            }, null, this);
+            this.boss.walking =false;
+            this.clock = this.time.delayedCall(2000, () => {
+                
+                this.boss.x += 0.8;
+                this.boss.y -= 0.5;
+                this.temp -= 0.005;
+                this.boss.setScale(this.temp);
+            }, null, this);
+        }
+
 
         // Click the reveal the x & y postions
         if (this.mouse.isDown) {

@@ -45,7 +45,8 @@ class Load extends Phaser.Scene {
             { key: 'game-screen' },
             { key: 'work-screen' },
             { key: 'watching-colleague' },
-            { key: 'angry-colleague' }
+            { key: 'angry-colleague' },
+            { key: 'boss' }
 
         ]);
 
