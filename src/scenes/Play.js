@@ -20,6 +20,7 @@ class Play extends Phaser.Scene {
         this.random = Math.floor(Math.random() * 10);
 
         this.boss = new Boss(this,0);
+        this.text = this.add.text(0, 0, 'Boss').setScale(1.5);
         
         // while(this.boss.positionX>=45 && this.boss.positionY<=553){
         //     this.boss.positionX += 1;
@@ -27,7 +28,7 @@ class Play extends Phaser.Scene {
         // }
 
         // Create the background work area
-        this.background = this.add.sprite(5, 0, 'WorkArea').setOrigin(0.0);
+        this.background = this.add.sprite(1, 0, 'WorkArea').setScale(1.01).setOrigin(0.0);
         this.backgroundMusic = this.sound.add('workBgm', { mute: false, volume: 0.5, rate: 1, loop: true });
 
         // This is the progress bar
@@ -50,11 +51,11 @@ class Play extends Phaser.Scene {
         });
 
         // Create trun around collegaue in the scene
-        this.colleague = this.add.sprite(611, 300, 'watching-colleague').setOrigin(0.0);
+        this.colleague = this.add.sprite(611, 300, 'watching-colleague').setOrigin(0.0);
         this.colleague.setAlpha(0.0);
 
         // Create the working computer screen on the scene
-        this.computerScreen = this.add.sprite(514, 441, 'work-screen').setOrigin(0.0);
+        this.computerScreen = this.add.sprite(514, 441, 'work-screen').setOrigin(0.0);
 
         // The mouse input
         this.mouse = this.input.mousePointer;
@@ -89,35 +90,6 @@ class Play extends Phaser.Scene {
     
 
     update() {
-        if(this.boss.x>=50 && this.boss.walking ==true){
-            this.boss.x -= 0.8;
-            this.boss.y += 0.5;
-            this.temp += 0.005;
-            this.boss.setScale(this.temp);
-        }else{
-            this.boss.flipX=true;
-            if(this.boss.x==50){
-                this.boss.watch =true;
-            }else{
-                this.boss.watch =false;
-            }
-            this.clock = this.time.delayedCall(300, () => {
-                if(this.boss.watch==true && playGame==true){
-                    this.backgroundMusic.stop();
-                    this.scene.start("GameOver");
-                }
-            }, null, this);
-            this.boss.walking =false;
-            this.clock = this.time.delayedCall(2000, () => {
-                
-                this.boss.x += 0.8;
-                this.boss.y -= 0.5;
-                this.temp -= 0.005;
-                this.boss.setScale(this.temp);
-            }, null, this);
-        }
-
-
         // Click the reveal the x & y postions
         if (this.mouse.isDown) {
             console.log("x: ", this.input.x, "y: ", this.input.y);
@@ -125,6 +97,7 @@ class Play extends Phaser.Scene {
 
         // Game Loop
         if (gameStatus == true && gameScore < 100) {
+        
             // Check if user press SPACE to play the game or not
             if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
 
@@ -149,7 +122,6 @@ class Play extends Phaser.Scene {
             if (sanity < 1) {
                 this.backgroundMusic.stop();
                 this.scene.start("GameOver");
-
             }
 
             // When playgame is true, increase the progress bar, else
@@ -173,10 +145,47 @@ class Play extends Phaser.Scene {
                 }
             }
 
+            //boss
+            if(this.boss.alive == true){
+                this.text.x=this.boss.x;
+                this.text.y=this.boss.y-this.temp*50;
+                this.text.setScale(this.temp);
+                if(this.boss.x>=50 && this.boss.walking ==true){
+                    this.boss.x -= 0.8;
+                    this.boss.y += 0.5;
+                    this.temp += 0.005;
+                    this.boss.setScale(this.temp);
+                }else if(this.boss.walking == false){
+                    this.clock = this.time.delayedCall(2000, () => {
+                        this.boss.watch=false;
+                        this.boss.x += 0.8;
+                        this.boss.y -= 0.5;
+                        this.temp -= 0.005;
+                        this.boss.setScale(this.temp);
+                    }, null, this);
+                }else{
+                    this.boss.flipX=true;
+                    this.boss.watch=true;
+                    this.clock = this.time.delayedCall(300, () => {
+                        if(this.boss.watch==true && playGame==true){
+                            this.backgroundMusic.stop();
+                            this.scene.start("GameOver");
+                        }
+                    }, null, this);
+                    this.boss.walking =false;
+                }
+                if (this.boss.x > 300) {
+                    this.boss.alive = false;
+                    this.text.destroy();
+                    this.boss.destroy();
+                    console.log("test");
+                }
+            }
+            
             // When we get a random number 5, we get the collegaue checking event
             if (randomNum == 5) {
                 randomNum = 0;
-                this.sound.play("whatrudoing", { volume: 0.5 });
+                this.sound.play("whatrudoing", { volume: 0.3 });
                 this.colleague.setAlpha(1.0);
 
 
@@ -195,7 +204,7 @@ class Play extends Phaser.Scene {
             // If player failed to release (Space) in 0.5s, when collegaue
             // is checking, then gameover.
             if (playGame == true && watch == true) {
-                this.sound.play("wuuut", { volume: 0.7 });
+                this.sound.play("wuuut", { volume: 0.5 });
                 this.colleague.setTexture('angry-colleague');
 
                 gameStatus = false;

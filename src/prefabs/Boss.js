@@ -1,6 +1,7 @@
 //Obstacle1 prehabs
 class Boss extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, velocity) {
+        
         // call Phaser Physics Sprite constructor
         super(scene, 250, 330, 'boss');
         // set up physics sprite
@@ -13,13 +14,12 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
         this.angle = -35;
         this.walking = true;
         this.watch = false;
+        this.alive = true;
     }
 
     update() {
         // override physics sprite update()
         super.update();
-        if (this.x < -this.width || this.y < this.height) {
-            this.destroy();
-        }
+
     }
 }
