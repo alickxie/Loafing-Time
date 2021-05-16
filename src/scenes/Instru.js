@@ -3,7 +3,6 @@ class Instru extends Phaser.Scene {
         super("instruScene");
     }
 
-
     create() {
         //place background
         // this.background = this.add.tileSprite(0, 0, 800, 480, 'forest').setOrigin(0.0);

@@ -27,7 +27,6 @@ class Load extends Phaser.Scene {
         });
         loadingText.setOrigin(0.5, 0.5);
 
-
         this.load.on('progress', function (value) {
             progressBar.clear();
             progressBar.fillStyle(0xffffff, 1);
@@ -43,7 +42,6 @@ class Load extends Phaser.Scene {
         this.load.path = './assets/image/';
         this.load.image('WorkArea', 'WorkArea.png');
         this.load.image([
-            // { key: 'WorkArea' },
             { key: 'game-screen' },
             { key: 'work-screen' },
             { key: 'watching-colleague' },

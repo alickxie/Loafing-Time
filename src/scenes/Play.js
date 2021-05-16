@@ -20,7 +20,7 @@ class Play extends Phaser.Scene {
         this.random = Math.floor(Math.random() * 10);
 
         // Create the background work area
-        this.background = this.add.sprite(1, 0, 'WorkArea').setScale(1.01).setOrigin(0.0);
+        this.background = this.add.sprite(5, 0, 'WorkArea').setOrigin(0.0);
         this.backgroundMusic = this.sound.add('workBgm', { mute: false, volume: 0.5, rate: 1, loop: true });
 
         // This is the progress bar
