@@ -126,6 +126,8 @@ class Play extends Phaser.Scene {
             if (sanity < 1) {
                 this.backgroundMusic.stop();
                 reason = "You are Institutionalized!"
+                this.boss.destroy();
+                this.text.destroy();
                 this.scene.start("GameOver");
             }
 
@@ -149,7 +151,7 @@ class Play extends Phaser.Scene {
                     console.log(gameScore);
                 }
             }
-            if(this.boss.alive == false && randomNum == 15){
+            if (this.boss.alive == false && randomNum == 15) {
                 this.boss = new Boss(this, 0);
                 this.text = this.add.text(0, 0, 'Boss').setScale(1.5);
                 this.temp = 1;
@@ -175,8 +177,8 @@ class Play extends Phaser.Scene {
                         this.boss.setScale(this.temp);
                     }, null, this);
                 }
-                if (this.boss.x <= 50){
-                    if(this.boss.flipX == false)this.boss.flipX = true;
+                if (this.boss.x <= 50) {
+                    if (this.boss.flipX == false) this.boss.flipX = true;
                     this.boss.walking = false;
                     this.clock = this.time.delayedCall(300, () => {
                         this.boss.watch = true;
@@ -192,7 +194,7 @@ class Play extends Phaser.Scene {
                 }
                 if (this.boss.x > 300) {
                     // this.boss.setAlpha(0.0);
-                    
+
                     this.boss.alive = false;
                     this.boss.destroy();
                     this.text.destroy();
@@ -246,6 +248,8 @@ class Play extends Phaser.Scene {
                 this.clock = this.time.delayedCall(2000, () => {
                     this.backgroundMusic.stop();
                     reason = "You are caught by your colleague!"
+                    this.boss.destroy();
+                    this.text.destroy();
                     this.scene.start("GameOver");
                 }, null, this);
             }
@@ -256,6 +260,8 @@ class Play extends Phaser.Scene {
                 this.clock = this.time.delayedCall(2000, () => {
                     this.backgroundMusic.stop();
                     reason = "You are caught by the manager!"
+                    this.boss.destroy();
+                    this.text.destroy();
                     this.scene.start("GameOver");
                 }, null, this);
             }
