@@ -41,6 +41,7 @@ let input;
 // define globals
 let centerX = game.config.width / 2;
 let centerY = game.config.height / 2;
+let reason;
 let time;
 let gameScore;
 let sanity;
@@ -48,5 +49,6 @@ let gameStatus;
 let completeness;
 let playGame;
 let watch;
+let indoor;
 let currentScene;
 let randomNum;

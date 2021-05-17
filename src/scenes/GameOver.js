@@ -27,6 +27,7 @@ class GameOver extends Phaser.Scene {
             fixedWidth: 0,
         }
         this.add.text(centerX, 300, '[ Game Over ]', creditConfig).setOrigin(0.5);
+        this.add.text(centerX, 250, reason, creditConfig).setOrigin(0.5);
 
         keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);

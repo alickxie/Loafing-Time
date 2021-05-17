@@ -8,6 +8,7 @@ class Play extends Phaser.Scene {
     // Create object in Playscene
     create() {
         // The global variable.
+        reason = "No Reason."
         gameScore = 0;
         sanity = 100;
         playGame = false;
@@ -17,7 +18,7 @@ class Play extends Phaser.Scene {
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.temp = 1;
         // The random number used to generate collegaues
-        this.random = Math.floor(Math.random() * 10);
+        this.random = Math.floor(Math.random() * 20);
 
         this.boss = new Boss(this, 0);
         this.text = this.add.text(0, 0, 'Boss').setScale(1.5);
@@ -53,6 +54,9 @@ class Play extends Phaser.Scene {
         // Create trun around collegaue in the scene
         this.colleague = this.add.sprite(611, 300, 'watching-colleague').setOrigin(0.0);
         this.colleague.setAlpha(0.0);
+        this.door = this.add.sprite(1120, 350, 'door').setOrigin(0.0);
+        this.door.setScale(2.0);
+        this.door.setAlpha(0.0);
 
         // Create the working computer screen on the scene
         this.computerScreen = this.add.sprite(514, 441, 'work-screen').setOrigin(0.0);
@@ -85,7 +89,7 @@ class Play extends Phaser.Scene {
 
     // rando function to get random number from (0-9)
     rando() {
-        randomNum = Math.floor(Math.random() * 10);
+        randomNum = Math.floor(Math.random() * 20);
     }
 
 
@@ -144,7 +148,11 @@ class Play extends Phaser.Scene {
                     console.log(gameScore);
                 }
             }
-
+            if(this.boss.alive == false && randomNum == 15){
+                this.boss = new Boss(this, 0);
+                this.text = this.add.text(0, 0, 'Boss').setScale(1.5);
+                this.temp = 1;
+            }
             //boss
             if (this.boss.alive == true) {
                 this.text.x = this.boss.x;
@@ -167,7 +175,7 @@ class Play extends Phaser.Scene {
                     }, null, this);
                 }
                 if (this.boss.x <= 50){
-                    this.boss.flipX = true;
+                    if(this.boss.flipX == false)this.boss.flipX = true;
                     this.boss.walking = false;
                     this.clock = this.time.delayedCall(300, () => {
                         this.boss.watch = true;
@@ -175,15 +183,17 @@ class Play extends Phaser.Scene {
                 }
                 if (this.boss.watch == true && playGame == true) {
                     this.backgroundMusic.stop();
+                    reason = "You are caught by your Boss!"
                     this.scene.start("GameOver");
                 }
-
                 if (this.boss.x > 300) {
-
+                    // this.boss.setAlpha(0.0);
+                    
                     this.boss.alive = false;
-                    this.text.destroy();
                     this.boss.destroy();
+                    this.text.destroy();
                     console.log("test");
+                    console.log(this.boss.y);
                 }
             }
 
@@ -194,7 +204,7 @@ class Play extends Phaser.Scene {
                 this.colleague.setAlpha(1.0);
 
 
-                this.clock = this.time.delayedCall(450, () => {
+                this.clock = this.time.delayedCall(500, () => {
                     watch = true;
                 }, null, this);
 
@@ -202,6 +212,24 @@ class Play extends Phaser.Scene {
                     if (gameStatus == true) {
                         this.colleague.setAlpha(0.0);
                         watch = false;
+                    }
+                }, null, this);
+            }
+            //door 
+            if (randomNum == 10) {
+                randomNum = 0;
+                // this.sound.play("whatrudoing", { volume: 0.3 });
+                this.door.setAlpha(1.0);
+
+
+                this.clock = this.time.delayedCall(500, () => {
+                    indoor = true;
+                }, null, this);
+
+                this.clock = this.time.delayedCall(2000, () => {
+                    if (gameStatus == true) {
+                        this.door.setAlpha(0.0);
+                        indoor = false;
                     }
                 }, null, this);
             }
@@ -215,6 +243,17 @@ class Play extends Phaser.Scene {
                 gameStatus = false;
                 this.clock = this.time.delayedCall(2000, () => {
                     this.backgroundMusic.stop();
+                    reason = "You are caught by your colleague!"
+                    this.scene.start("GameOver");
+                }, null, this);
+            }
+            if (playGame == true && indoor == true) {
+                // this.sound.play("wuuut", { volume: 0.5 });
+                // this.colleague.setTexture('angry-colleague');
+                gameStatus = false;
+                this.clock = this.time.delayedCall(2000, () => {
+                    this.backgroundMusic.stop();
+                    reason = "You are caught by the manager!"
                     this.scene.start("GameOver");
                 }, null, this);
             }

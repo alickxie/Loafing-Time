@@ -9,12 +9,15 @@ class Boss extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);       // add physics body
         this.setVelocityX(velocity);            // make it go!
         this.setImmovable(true);
+        this.setScale(1.0);
+        this.depth = -1;
         // this.setSize(0, this.y + 50, false)
         this.body.setAllowGravity(false);
         this.angle = -35;
         this.walking = true;
         this.watch = false;
         this.alive = true;
+        this.flipX = false;
     }
 
     update() {
