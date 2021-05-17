@@ -143,7 +143,7 @@ class Play extends Phaser.Scene {
             } else {
                 time++;
                 if (time >= 100) {
-                    sanity -= 3;
+                    sanity -= 2;
                     time -= 100;
                     this.SanityText.setText('Sanity: ' + sanity + ' / 100');
                     console.log(gameScore);
@@ -224,7 +224,7 @@ class Play extends Phaser.Scene {
                 this.door.setAlpha(1.0);
 
 
-                this.clock = this.time.delayedCall(500, () => {
+                this.clock = this.time.delayedCall(600, () => {
                     indoor = true;
                 }, null, this);
 
