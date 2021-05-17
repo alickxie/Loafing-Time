@@ -125,6 +125,7 @@ class Play extends Phaser.Scene {
             // If the current score less than 1, Gameover
             if (sanity < 1) {
                 this.backgroundMusic.stop();
+                reason = "You are Institutionalized!"
                 this.scene.start("GameOver");
             }
 
