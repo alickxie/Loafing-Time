@@ -184,7 +184,10 @@ class Play extends Phaser.Scene {
                 if (this.boss.watch == true && playGame == true) {
                     this.backgroundMusic.stop();
                     reason = "You are caught by your Boss!"
+                    this.boss.destroy();
+                    this.text.destroy();
                     this.scene.start("GameOver");
+
                 }
                 if (this.boss.x > 300) {
                     // this.boss.setAlpha(0.0);
@@ -192,8 +195,6 @@ class Play extends Phaser.Scene {
                     this.boss.alive = false;
                     this.boss.destroy();
                     this.text.destroy();
-                    console.log("test");
-                    console.log(this.boss.y);
                 }
             }
 
