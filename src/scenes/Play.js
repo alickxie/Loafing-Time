@@ -2,7 +2,6 @@ class Play extends Phaser.Scene {
     constructor() {
         super("playScene");
         input = this.input;
-
     }
 
     // Create object in Playscene
@@ -28,8 +27,11 @@ class Play extends Phaser.Scene {
         //     this.boos.positionY -= 2.8;
         // }
 
+        // Add the colleague computer screen
+        this.colleagueScreen = this.add.sprite(578, 264, 'work-screen').setOrigin(0.0).setScale(0.7);
+
         // Create the background work area
-        this.background = this.add.sprite(1, 0, 'WorkArea').setScale(1.01).setOrigin(0.0);
+        this.background = this.add.sprite(1, 0, 'WorkArea').setScale(1.0).setOrigin(0.0);
         this.backgroundMusic = this.sound.add('workBgm', { mute: false, volume: 0.5, rate: 1, loop: true });
 
         // This is the progress bar
@@ -40,10 +42,10 @@ class Play extends Phaser.Scene {
         this.Bar.y = 80;
         this.Box.y = 80;
         this.Box.fillStyle(0x222222, 0.8);
-        this.Box.fillRect(255, 70, 320, 50);
+        this.Box.fillRect(220, 60, 320, 50);
 
         // Add the sanity text to the scene
-        this.SanityText = this.add.text(535, 40, `Sanity: ${sanity} / 100`, {
+        this.SanityText = this.add.text(520, 100, `Sanity: ${sanity} / 100`, {
             fontFamily: 'Pangolin',
             fontSize: '30px',
             color: '#FF0000 ',
@@ -52,14 +54,14 @@ class Play extends Phaser.Scene {
         });
 
         // Create trun around collegaue in the scene
-        this.colleague = this.add.sprite(611, 300, 'watching-colleague').setOrigin(0.0);
+        this.colleague = this.add.sprite(600, 303, 'watching-colleague').setOrigin(0.0);
         this.colleague.setAlpha(0.0);
         this.door = this.add.sprite(1120, 350, 'door').setOrigin(0.0);
         this.door.setScale(2.0);
         this.door.setAlpha(0.0);
 
         // Create the working computer screen on the scene
-        this.computerScreen = this.add.sprite(514, 441, 'work-screen').setOrigin(0.0);
+        this.computerScreen = this.add.sprite(561, 415, 'work-screen').setOrigin(0.0);
 
         // The mouse input
         this.mouse = this.input.mousePointer;
@@ -139,7 +141,7 @@ class Play extends Phaser.Scene {
                     gameScore += 2;
                     time -= 100;
                     this.Bar.fillStyle(0x00ff00, 1);
-                    this.Bar.fillRect(260, 80, 3 * gameScore, 30);
+                    this.Bar.fillRect(230, 70, 3 * gameScore, 30);
                     console.log(gameScore);
                 }
             } else {
