@@ -36,7 +36,7 @@ class Menu extends Phaser.Scene {
             .on('pointerout', () => { playButton.alpha = 1.0 })
             .on('pointerup', () => {
                 this.sound.play("select_music", { volume: 2.0 });
-                this.scene.start("playScene");
+                this.scene.start("playScene1");
             });
 
         this.add.text(playButton.x, playButton.y, 'Play')
