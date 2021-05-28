@@ -47,17 +47,20 @@ class Instru extends Phaser.Scene {
         this.add.text(centerX, centerY + 120, 'Avoid being catach while playing game at work.', credit2Config).setOrigin(0.5);
 
         //type space to play
-        this.add.text(centerX, centerY + 220, '[ Press (M) to the Menu]', creditConfig).setOrigin(0.5);
-        keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
+        let i = this.add.text(centerX, centerY + 280, '[   Menu   ]', creditConfig)
+            .setOrigin(0.5)
+
+        const menuButton = this.add.image(centerX, centerY + 280, 'glass-panel')
+            .setDisplaySize(200, 30).setInteractive()
+            .on('pointerover', () => { menuButton.alpha = 0.5; i.alpha = 0.7 })
+            .on('pointerout', () => { menuButton.alpha = 1.0; i.alpha = 1.0 })
+            .on('pointerup', () => {
+                this.sound.play("select_music", { volume: 2.0 });
+                this.scene.start("menuScene");
+            });
     }
 
     update() {
-        //scroll the background
-        // this.background.tilePositionX += 1;
 
-        if (Phaser.Input.Keyboard.JustDown(keyM)) {
-            this.sound.play("select_music", { volume: 2.0 });
-            this.scene.start("menuScene");
-        }
     }
 }

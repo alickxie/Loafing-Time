@@ -34,8 +34,8 @@ class Credits extends Phaser.Scene {
         this.add.text(centerX, centerY - 230, 'Game Designer:', titleConfig).setOrigin(0.5);
         this.add.text(centerX, centerY - 190, 'Yufeng Xie,  Larry Li,  Jiaying Hou', text1Config).setOrigin(0.5);
 
-        this.add.text(centerX, centerY -130, 'Programmer:', titleConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY -90, 'Yufeng Xie,  Larry Li', text1Config).setOrigin(0.5);
+        this.add.text(centerX, centerY - 130, 'Programmer:', titleConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY - 90, 'Yufeng Xie,  Larry Li', text1Config).setOrigin(0.5);
 
         this.add.text(centerX, centerY - 30, 'Sound Effect:', titleConfig).setOrigin(0.5);
         this.add.text(centerX, centerY + 10, 'Larry Li', text1Config).setOrigin(0.5);
@@ -47,17 +47,21 @@ class Credits extends Phaser.Scene {
         this.add.text(centerX, centerY + 210, 'Jiaying Hou', text1Config).setOrigin(0.5);
 
         //type space to play
-        this.add.text(centerX, centerY + 280, '[ Press (M) to Return ]', creditConfig).setOrigin(0.5);
-        keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
+        let i = this.add.text(centerX, centerY + 280, '[   Menu   ]', creditConfig)
+            .setOrigin(0.5)
+
+        const menuButton = this.add.image(centerX, centerY + 280, 'glass-panel')
+            .setDisplaySize(200, 30).setInteractive()
+            .on('pointerover', () => { menuButton.alpha = 0.5; i.alpha = 0.7 })
+            .on('pointerout', () => { menuButton.alpha = 1.0; i.alpha = 1.0 })
+            .on('pointerup', () => {
+                this.sound.play("select_music", { volume: 2.0 });
+                this.scene.start("menuScene");
+            });
     }
 
     update() {
         //scroll the background
-        // this.background.tilePositionX += 1;
 
-        if (Phaser.Input.Keyboard.JustDown(keyM)) {
-            this.sound.play("select_music", { volume: 2.0 });
-            this.scene.start("menuScene");
-        }
     }
 }

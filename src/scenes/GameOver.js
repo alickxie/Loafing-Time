@@ -4,6 +4,7 @@ class GameOver extends Phaser.Scene {
     }
 
     create() {
+
         let creditConfig = {
             color: '#CD00CD',
             fontFamily: 'Pangolin',
@@ -13,9 +14,32 @@ class GameOver extends Phaser.Scene {
             align: 'left',
             fixedWidth: 0,
         }
+        let i = this.add.text(centerX, 550, '[   Menu   ]', creditConfig)
+            .setOrigin(0.5)
 
-        this.add.text(centerX, 420, '[ Press (M) to Menu]', creditConfig).setOrigin(0.5);
-        this.add.text(centerX, 380, '[ Press (R) for Retry]', creditConfig).setOrigin(0.5);
+        const menuButton = this.add.image(centerX, 550, 'glass-panel')
+            .setDisplaySize(200, 30).setInteractive()
+            .on('pointerover', () => { menuButton.alpha = 0.5; i.alpha = 0.7 })
+            .on('pointerout', () => { menuButton.alpha = 1.0; i.alpha = 1.0 })
+            .on('pointerup', () => {
+                this.sound.play("select_music", { volume: 2.0 });
+                this.scene.start("menuScene");
+            });
+
+
+        let ii = this.add.text(centerX, 600, '[   Retry   ]', creditConfig)
+            .setOrigin(0.5)
+
+        const retryButton = this.add.image(centerX, 600, 'glass-panel')
+            .setDisplaySize(200, 30).setInteractive()
+            .on('pointerover', () => { retryButton.alpha = 0.5; ii.alpha = 0.7 })
+            .on('pointerout', () => { retryButton.alpha = 1.0; ii.alpha = 1.0  })
+            .on('pointerup', () => {
+                this.sound.play("select_music", { volume: 2.0 });
+                this.scene.start(currentScene);
+            });
+
+
 
         creditConfig = {
             color: '#CD00CD',
@@ -29,18 +53,9 @@ class GameOver extends Phaser.Scene {
         this.add.text(centerX, 300, '[ Game Over ]', creditConfig).setOrigin(0.5);
         this.add.text(centerX, 250, reason, creditConfig).setOrigin(0.5);
 
-        keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
-        keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(keyM)) {
-            this.sound.play("select_music", { volume: 2.0 });
-            this.scene.start("menuScene");
-        }
-        if (Phaser.Input.Keyboard.JustDown(keyR)) {
-            this.sound.play("select_music", { volume: 2.0 });
-            this.scene.start(currentScene);
-        }
+
     }
 }

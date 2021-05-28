@@ -250,8 +250,9 @@ class Play extends Phaser.Scene {
                 this.clock = this.time.delayedCall(2000, () => {
                     this.backgroundMusic.stop();
                     reason = "You are caught by your colleague!"
-                    this.boss.destroy();
                     this.text.destroy();
+                    this.boss.destroy();
+                    watch = false;
                     this.scene.start("GameOver");
                 }, null, this);
             }
@@ -262,8 +263,10 @@ class Play extends Phaser.Scene {
                 this.clock = this.time.delayedCall(2000, () => {
                     this.backgroundMusic.stop();
                     reason = "You are caught by the manager!"
-                    this.boss.destroy();
+                    
                     this.text.destroy();
+                    this.boss.destroy();
+                    indoor = false;
                     this.scene.start("GameOver");
                 }, null, this);
             }

@@ -28,12 +28,7 @@ class Menu extends Phaser.Scene {
         this.add.text(centerX, centerY - 100, 'Loafing Time', menuConfig).setOrigin(0.5);
 
         //place background
-        let canvas = this.sys.canvas;
-        canvas.style.cursor = 'none';
-        let CSSString = 'cursor-hand'
-        this.input.cursor = CSSString;
-        this.cursor = this.add.sprite(this.input.x, this.input.y, 'cursor-hand').setOrigin(0.5);
-        // Play button
+        this.input.setDefaultCursor('url(/assets/image/cursor_hand.png), pointer');
         const { width, height } = this.scale
         const playButton = this.add.image(width * 0.5, height * 0.6, 'glass-panel')
             .setDisplaySize(150, 50).setInteractive()
@@ -80,9 +75,6 @@ class Menu extends Phaser.Scene {
     }
 
     update() {
-        //scroll the background
-        // this.background.tilePositionX += 1;
-        this.cursor.x = this.input.x;
-        this.cursor.y = this.input.y;
+
     }
 }
