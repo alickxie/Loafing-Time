@@ -1,4 +1,3 @@
-//Obstacle1 prehabs
 class Boss extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, velocity) {
         

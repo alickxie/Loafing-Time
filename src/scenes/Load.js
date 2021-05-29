@@ -53,6 +53,11 @@ class Load extends Phaser.Scene {
             { key: 'classroom' },
             { key: 'teacher' },
             { key: 'arm' },
+            { key: 'desk1' },
+            { key: 'desk2' },
+            { key: 'trashCan-Base' },
+            { key: 'trashCan-Left' },
+            { key: 'trashCan-Right' },
             { key: 'trashBall' }
 
         ]);
