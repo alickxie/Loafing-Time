@@ -9,13 +9,14 @@ class Scene1 extends Phaser.Scene {
         this.score = 0;
         this.t = 0;
         this.pointer = this.input.activePointer;
+        watch = false;
         currentScene = "playScene1";
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.mouse = this.input.mousePointer;
         this.fire = false;
         this.Box = this.add.graphics();
         this.Bar = this.add.graphics();
-        
+
 
 
         this.background = this.add.sprite(1, 0, 'classroom').setScale(1.0).setOrigin(0.0).setDepth(-1)
@@ -42,24 +43,25 @@ class Scene1 extends Phaser.Scene {
         this.right.setVisible(false);
         this.right.setImmovable(true);
         this.right.body.setAllowGravity(false);
-
-
+        //teacher:
+        this.teacher = this.add.sprite(87, 117, 'teacher').setOrigin(0.0).setScale(1.1);
+        this.teacher.setAlpha(0.0);
+        //blocks:
         this.checker = this.physics.add.sprite(397, 660, 'trashCan-Base').setOrigin(0, 0).setScale(1.5);
         this.checker.setImmovable(true);
         this.checker.setVisible(false);
         this.checker.body.setAllowGravity(false);
-        
-        this.airBlock2 = this.physics.add.sprite(80, 118, 'desk1').setOrigin(0, 0).setScale(0.95,1.81);
+        this.airBlock2 = this.physics.add.sprite(80, 118, 'desk1').setOrigin(0, 0).setScale(0.95, 1.81);
         this.airBlock2.alpha = 0.7;
         this.airBlock2.setImmovable(true);
         this.airBlock2.body.setAllowGravity(false);
         this.airBlock2.setVisible(false);
-        this.airBlock1 = this.physics.add.sprite(745, 380, 'desk1').setOrigin(0, 0).setScale(0.95,1.81);
+        this.airBlock1 = this.physics.add.sprite(745, 380, 'desk1').setOrigin(0, 0).setScale(0.95, 1.81);
         this.airBlock1.alpha = 0.7;
         this.airBlock1.setImmovable(true);
         this.airBlock1.body.setAllowGravity(false);
         this.airBlock1.setVisible(false);
-        this.airBlock = this.physics.add.sprite(560, 530, 'desk1').setOrigin(0, 0).setScale(1.8,0.5);
+        this.airBlock = this.physics.add.sprite(560, 530, 'desk1').setOrigin(0, 0).setScale(1.8, 0.5);
         this.airBlock.alpha = 0.7;
         this.airBlock.setImmovable(true);
         this.airBlock.body.setAllowGravity(false);
@@ -72,24 +74,27 @@ class Scene1 extends Phaser.Scene {
 
     }
     update() {
-        // this.checker.disableBody(false,false);
+
         if (keySPACE.isDown) {
-            
+            this.fire = true;
             this.t += 10;
             if (this.t >= 1500) {
                 this.t = 1500;
             }
-            
+
             this.Bar.fillStyle(0x00ff00, 1);
             this.Bar.fillRect(1195, 340, 40, -this.t / 5);
             let angle = Phaser.Math.Angle.Between(this.arm.x, this.arm.y, this.input.x, this.input.y);
             this.arm.alpha = 1;
             this.arm.setRotation(angle - 60);
 
+        }else if(watch == true && this.fire == true ){
+            console.log('game over')
         }
-        
+
         if (Phaser.Input.Keyboard.JustUp(keySPACE)) {
-            if(!this.checker.enableBody()){
+            this.fire = false;
+            if (!this.checker.enableBody()) {
                 this.checker.enableBody();
             }
             this.trashBall = this.physics.add.sprite(1270, 360, 'trashBall').setScale(0.2).setBounce(0.2);
@@ -99,7 +104,14 @@ class Scene1 extends Phaser.Scene {
             this.physics.add.collider(this.base, this.trashBall);
             this.physics.add.collider(this.airBlock, this.trashBall);
             this.physics.add.collider(this.airBlock1, this.trashBall);
-            this.physics.add.collider(this.airBlock2, this.trashBall);
+            this.physics.add.collider(this.airBlock2, this.trashBall, () => {
+                this.teacher.alpha = 1;
+                watch = true;
+                this.time.delayedCall(2000, () => {
+                    this.teacher.setAlpha(0.0);
+                    watch = false;
+                }, null, this);
+            });
             this.physics.add.overlap(this.checker, this.trashBall, () => {
                 this.score += 1;
                 console.log(this.score);
@@ -110,6 +122,7 @@ class Scene1 extends Phaser.Scene {
             this.trashBall.setGravity(0, 1500);
             this.physics.moveTo(this.trashBall, this.input.x, this.input.y, this.t * 2);
 
+            
             this.Bar.clear();
             this.arm.alpha = 0;
             this.t = 0;
