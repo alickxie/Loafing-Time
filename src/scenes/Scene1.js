@@ -33,20 +33,27 @@ class Scene1 extends Phaser.Scene {
         this.base.body.setAllowGravity(false);
 
         this.left = this.physics.add.sprite(394, 667, 'trashCan-Left').setOrigin(0.5, 0.5).setScale(1.82);
-        this.left.setAngle(-13.5);
+        // this.left.setAngle(-13.5);
+        this.left.setVisible(false);
         this.left.setImmovable(true);
         this.left.body.setAllowGravity(false);
-        this.right = this.physics.add.sprite(473, 667, 'trashCan-Right').setOrigin(0.5, 0.5).setScale(1.82);
-        this.right.setAngle(13.5);
+        this.right = this.physics.add.sprite(478, 667, 'trashCan-Right').setOrigin(0.5, 0.5).setScale(1.82);
+        // this.right.setAngle(13.5);
+        this.right.setVisible(false);
         this.right.setImmovable(true);
         this.right.body.setAllowGravity(false);
 
 
         this.checker = this.physics.add.sprite(397, 660, 'trashCan-Base').setOrigin(0, 0).setScale(1.5);
         this.checker.setImmovable(true);
-        // this.checker.setVisible(false);
+        this.checker.setVisible(false);
         this.checker.body.setAllowGravity(false);
-
+        
+        this.airBlock2 = this.physics.add.sprite(80, 118, 'desk1').setOrigin(0, 0).setScale(0.95,1.81);
+        this.airBlock2.alpha = 0.7;
+        this.airBlock2.setImmovable(true);
+        this.airBlock2.body.setAllowGravity(false);
+        this.airBlock2.setVisible(false);
         this.airBlock1 = this.physics.add.sprite(745, 380, 'desk1').setOrigin(0, 0).setScale(0.95,1.81);
         this.airBlock1.alpha = 0.7;
         this.airBlock1.setImmovable(true);
@@ -92,6 +99,7 @@ class Scene1 extends Phaser.Scene {
             this.physics.add.collider(this.base, this.trashBall);
             this.physics.add.collider(this.airBlock, this.trashBall);
             this.physics.add.collider(this.airBlock1, this.trashBall);
+            this.physics.add.collider(this.airBlock2, this.trashBall);
             this.physics.add.overlap(this.checker, this.trashBall, () => {
                 this.score += 1;
                 console.log(this.score);
