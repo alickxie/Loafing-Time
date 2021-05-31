@@ -4,6 +4,15 @@ class GameOver extends Phaser.Scene {
     }
 
     create() {
+        Scene1.score = 0;
+        Scene1.t = 0;
+        Scene1.fire = false;
+        Scene1.warn = 0;
+        Scene1.temper = 0;
+        watch = false;
+        // reason = 'No Reason';
+        sanity = 100;
+        time = 0;
 
         let creditConfig = {
             color: '#CD00CD',
