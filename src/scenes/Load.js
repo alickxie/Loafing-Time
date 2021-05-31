@@ -59,8 +59,11 @@ class Load extends Phaser.Scene {
             { key: 'trashCan-Base' },
             { key: 'trashCan-Left' },
             { key: 'trashCan-Right' },
-            { key: 'trashBall' }
-
+            { key: 'trashBall' },
+            { key: 'eating' },
+            { key: 'noeating' },
+            { key: 'scene2(version2)' },
+            { key: 'teacher-opMouse' }
         ]);
 
         // this.load.spritesheet('anims_fox', 'anims_fox.png', {

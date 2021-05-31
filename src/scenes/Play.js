@@ -209,7 +209,6 @@ class Play extends Phaser.Scene {
                 this.sound.play("whatrudoing", { volume: 0.3 });
                 this.colleague.setAlpha(1.0);
 
-
                 this.clock = this.time.delayedCall(500, () => {
                     watch = true;
                 }, null, this);
@@ -226,7 +225,6 @@ class Play extends Phaser.Scene {
                 randomNum = 0;
                 // this.sound.play("whatrudoing", { volume: 0.3 });
                 this.door.setAlpha(1.0);
-
 
                 this.clock = this.time.delayedCall(600, () => {
                     indoor = true;
@@ -263,7 +261,7 @@ class Play extends Phaser.Scene {
                 this.clock = this.time.delayedCall(2000, () => {
                     this.backgroundMusic.stop();
                     reason = "You are caught by the manager!"
-                    
+
                     this.text.destroy();
                     this.boss.destroy();
                     indoor = false;
