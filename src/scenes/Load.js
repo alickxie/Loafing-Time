@@ -42,7 +42,7 @@ class Load extends Phaser.Scene {
         this.load.path = './assets/image/';
         this.load.image('WorkArea', 'WorkArea.png');
         this.load.image('glass-panel', 'glassPanel.png');
-        this.load.image('cursor-hand', 'cursor_hand.png');
+        this.load.image('hand', 'hand.png');
         this.load.image([
             { key: 'game-screen' },
             { key: 'work-screen' },
