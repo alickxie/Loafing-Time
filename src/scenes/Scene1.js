@@ -53,12 +53,15 @@ class Scene1 extends Phaser.Scene {
         this.right.setVisible(false);
         this.right.setImmovable(true);
         this.right.body.setAllowGravity(false);
+
         //teacher:
         this.teacher = this.add.sprite(87, 117, 'teacher').setOrigin(0.0).setScale(1.1);
         this.teacher.setAlpha(0.0);
+
         //student
         this.student = this.add.sprite(748, 380, 'teacher').setOrigin(0.0).setScale(1.1);
         this.student.setAlpha(0.0);
+        
         //blocks:
         this.checker = this.physics.add.sprite(397, 660, 'trashCan-Base').setOrigin(0, 0).setScale(1.5);
         this.checker.setImmovable(true);

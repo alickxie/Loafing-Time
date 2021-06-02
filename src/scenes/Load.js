@@ -63,7 +63,8 @@ class Load extends Phaser.Scene {
             { key: 'eating' },
             { key: 'noeating' },
             { key: 'scene2(version2)' },
-            { key: 'teacher-opMouse' }
+            { key: 'teacher-opMouse' },
+            { key: 'square' }
         ]);
 
         // this.load.spritesheet('anims_fox', 'anims_fox.png', {
