@@ -19,7 +19,6 @@ class Menu extends Phaser.Scene {
             },
             fixedWidth: 0
         }
-
         //menu text UI
         let centerX = game.config.width / 2;
         let centerY = game.config.height / 2;
@@ -72,6 +71,7 @@ class Menu extends Phaser.Scene {
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+
     }
 
     update() {

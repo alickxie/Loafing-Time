@@ -55,7 +55,7 @@ class Load extends Phaser.Scene {
             { key: 'arm' },
             { key: 'desk1' },
             { key: 'desk2' },
-            { key: 'teacher' },
+            { key: 'teacher1' },
             { key: 'trashCan-Base' },
             { key: 'trashCan-Left' },
             { key: 'trashCan-Right' },
@@ -64,6 +64,10 @@ class Load extends Phaser.Scene {
             { key: 'noeating' },
             { key: 'scene2(version2)' },
             { key: 'teacher-opMouse' },
+            { key: 'girl' },
+            { key: 'girl_angry' },
+            { key: 'trashCan' },
+            { key: 'kid' },
             { key: 'square' }
         ]);
 
@@ -92,6 +96,7 @@ class Load extends Phaser.Scene {
         }
 
         // go to Title scene
-        this.scene.start('menuScene');
+        this.scene.start("playScene1"); 
+        // this.scene.start('menuScene');     
     }
 }

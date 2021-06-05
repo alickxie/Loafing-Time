@@ -34,50 +34,58 @@ class Scene1 extends Phaser.Scene {
                 console.log("x:", this.input.x, "y:", this.input.y)
             });
         // this.arm = this.add.sprite();
-        this.arm = this.add.sprite(1167, 496, 'arm').setOrigin(0, 1);
-
-        this.desk = this.physics.add.sprite(175, 380, 'desk1').setOrigin(0, 0).setScale(1.82);
+        this.arm = this.add.sprite(1180, 570, 'arm').setOrigin(0, 1).setScale(0.8).setAlpha(0);
+        this.trashCan = this.add.sprite(380, 720, 'trashCan').setOrigin(0, 1).setScale(0.7).setAlpha(0.7);
+        this.kid = this.add.sprite(1050, 720, 'kid').setOrigin(0, 1).setScale(1).setAlpha(1);
+        
+        this.desk = this.physics.add.sprite(227, 410, 'desk1').setOrigin(0, 0).setScale(1.28,1.82);
         this.desk.setImmovable(true);
+        this.desk.alpha = 0;
         this.desk.body.setAllowGravity(false);
         this.base = this.physics.add.sprite(397, 710, 'trashCan-Base').setOrigin(0, 0).setScale(1.82);
         this.base.setImmovable(true);
+        this.base.setAlpha(0);
         this.base.body.setAllowGravity(false);
 
-        this.left = this.physics.add.sprite(394, 667, 'trashCan-Left').setOrigin(0.5, 0.5).setScale(1.82);
-        // this.left.setAngle(-13.5);
+        this.left = this.physics.add.sprite(394, 667, 'trashCan-Left').setOrigin(0.5, 0.5).setScale(1,1.82);
+        
         this.left.setVisible(false);
         this.left.setImmovable(true);
         this.left.body.setAllowGravity(false);
-        this.right = this.physics.add.sprite(478, 667, 'trashCan-Right').setOrigin(0.5, 0.5).setScale(1.82);
-        // this.right.setAngle(13.5);
+        this.right = this.physics.add.sprite(468, 667, 'trashCan-Right').setOrigin(0.5, 0.5).setScale(1,1.82);
+        // this.right.setAngle(13.5); 
         this.right.setVisible(false);
         this.right.setImmovable(true);
         this.right.body.setAllowGravity(false);
 
         //teacher:
-        this.teacher = this.add.sprite(87, 117, 'teacher').setOrigin(0.0).setScale(1.1);
+        this.teacher = this.add.sprite(50, 110, 'teacher').setOrigin(0.0).setScale(1.1);
         this.teacher.setAlpha(0.0);
+        this.teacher1 = this.add.sprite(0, 120, 'teacher1').setOrigin(0.0).setScale(1.1);
+        this.teacher1.setAlpha(1);
 
         //student
-        this.student = this.add.sprite(748, 380, 'teacher').setOrigin(0.0).setScale(1.1);
-        this.student.setAlpha(0.0);
+        this.student = this.add.sprite(660, 330, 'girl_angry').setOrigin(0.0).setScale(1.1);
+        this.student.setAlpha(0);
+        this.student1 = this.add.sprite(680, 438, 'girl').setOrigin(0.0).setScale(1.1);
+        this.student1.setAlpha(1.0);
         
         //blocks:
         this.checker = this.physics.add.sprite(397, 660, 'trashCan-Base').setOrigin(0, 0).setScale(1.5);
         this.checker.setImmovable(true);
         this.checker.setVisible(false);
         this.checker.body.setAllowGravity(false);
-        this.airBlock2 = this.physics.add.sprite(80, 118, 'desk1').setOrigin(0, 0).setScale(0.95, 1.81);
+        this.airBlock2 = this.physics.add.sprite(100, 138, 'desk1').setOrigin(0, 0).setScale(0.95, 3);
         this.airBlock2.alpha = 0.7;
         this.airBlock2.setImmovable(true);
         this.airBlock2.body.setAllowGravity(false);
         this.airBlock2.setVisible(false);
-        this.airBlock1 = this.physics.add.sprite(745, 380, 'desk1').setOrigin(0, 0).setScale(0.95, 1.81);
+        this.airBlock1 = this.physics.add.sprite(755, 440, 'desk1').setOrigin(0, 0).setScale(0.95, 1.81);
         this.airBlock1.alpha = 0.7;
         this.airBlock1.setImmovable(true);
         this.airBlock1.body.setAllowGravity(false);
         this.airBlock1.setVisible(false);
-        this.airBlock = this.physics.add.sprite(560, 530, 'desk1').setOrigin(0, 0).setScale(1.8, 0.5);
+        this.airBlock = this.physics.add.sprite(580, 580, 'desk1').setOrigin(0, 0).setScale(1.8, 1);
         this.airBlock.alpha = 0.7;
         this.airBlock.setImmovable(true);
         this.airBlock.body.setAllowGravity(false);
@@ -133,9 +141,11 @@ class Scene1 extends Phaser.Scene {
         // console.log('jinqu')
         this.turn = true;
         this.teacher.alpha = 1;
+        this.teacher1.setAlpha(0);
         watch = true;
         this.time.delayedCall(2000, () => {
             this.teacher.setAlpha(0.0);
+            this.teacher1.setAlpha(1);
             watch = false;
             this.turn = false;
         }, null, this);
@@ -179,7 +189,7 @@ class Scene1 extends Phaser.Scene {
         }
 
         // ClassMate report
-        if (this.temper == 11) {
+        if (this.warn >= 3 && this.temper >= 10) {
             reason = "classmate report to teacher"
             this.scene.start("GameOver");
         } else if (this.temper == 7) {
@@ -200,7 +210,8 @@ class Scene1 extends Phaser.Scene {
             if (!this.checker.enableBody()) {
                 this.checker.enableBody();
             }
-            this.trashBall = this.physics.add.sprite(1270, 360, 'trashBall').setScale(0.2).setBounce(0.2);
+            this.trashBall = this.physics.add.sprite(1280, 470, 'trashBall').setOrigin(0.5).setScale(0.6).setBounce(0.2);
+            this.trashBall.setSize(20, 20 , false); 
             this.physics.add.collider(this.desk, this.trashBall);
             this.physics.add.collider(this.left, this.trashBall);
             this.physics.add.collider(this.right, this.trashBall);
@@ -208,11 +219,13 @@ class Scene1 extends Phaser.Scene {
             this.physics.add.collider(this.airBlock, this.trashBall);
             this.physics.add.collider(this.airBlock1, this.trashBall, () => {
                 this.student.alpha = 1;
+                this.student1.setAlpha(0);
                 indoor = true;
                 console.log('Yu Men')
                 this.temper += 1;
                 this.time.delayedCall(2000, () => {
                     this.student.setAlpha(0.0);
+                    this.student1.setAlpha(1.0);
                     indoor = false;
                 }, null, this);
             });
