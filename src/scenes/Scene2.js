@@ -5,6 +5,7 @@ class Scene2 extends Phaser.Scene {
     }
 
     create() {
+        played2 = true;
         currentScene = "playScene2";
         this.value = 0;
         this.awareness = 0;
@@ -14,12 +15,12 @@ class Scene2 extends Phaser.Scene {
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         // Add different sprite image into the scene
-        this.background = this.add.sprite(1, 0, 'scene2(version2)').setScale(1.0).setOrigin(0.0)
+        this.background = this.add.sprite(0, 0, 'scene2(version2)').setScale(1.0).setOrigin(0.0)
             .setInteractive().on('pointerup', () => {
                 console.log("x:", this.input.x, "y:", this.input.y);
             });
-        this.player = this.add.sprite(575, 290, 'noeating').setScale(1.1).setOrigin(0, 1);
-        this.teacherOP = this.add.sprite(648, 589, 'teacher-opMouse').setScale(1.5).setAlpha(0.0);
+        this.player = this.add.sprite(648, 360, 'noeating').setScale(1.0).setOrigin(0.5, 0.5);
+        this.teacherOP = this.add.sprite(648, 389, 'teacher2_speaking').setScale(1).setOrigin(0.5, 0.5);
 
         //Add checkBox to the world
         this.middleBox = this.physics.add.sprite(645, 480, 'square').setScale(0.05, 0.2);
@@ -77,10 +78,35 @@ class Scene2 extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+        const pauseButton = this.add.image(100, 50, 'glass-panel')
+            .setDisplaySize(150, 50).setInteractive()
+            .on('pointerover', () => { pauseButton.alpha = 0.5 })
+            .on('pointerout', () => { pauseButton.alpha = 1.0 })
+            .on('pointerup', () => {
+                this.sound.play("select_music", { volume: 2.0 });
+
+                this.scene.launch('Pause')
+                this.scene.pause();
+            });
+
+        this.add.text(pauseButton.x, pauseButton.y, 'Pause')
+            .setOrigin(0.5).setColor('#ff');
+
+        const settingsButton = this.add.image(100, 120, 'glass-panel')
+            .setDisplaySize(150, 50).setInteractive()
+            .on('pointerover', () => { settingsButton.alpha = 0.5 })
+            .on('pointerout', () => { settingsButton.alpha = 1.0 })
+            .on('pointerup', () => {
+                this.sound.play("select_music", { volume: 2.0 });
+                this.scene.start("menuScene");
+            });
+
+        this.add.text(settingsButton.x, settingsButton.y, 'Menu')
+            .setOrigin(0.5).setColor('#ff');
     }
 
     // Function to add beat on the world
-    addBeats(x,y) {
+    addBeats(x, y) {
         let beat = new Beat(this, this.beatSpeed, x, y).setScale(0.05);
         this.beatGroup.add(beat);
     }
@@ -94,7 +120,7 @@ class Scene2 extends Phaser.Scene {
         this.status = this.beatGroup.getFirstAlive();
         // Eating action of the player
         if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
-            
+
             this.player.setTexture('eating');
             this.value = 0;
 
@@ -119,7 +145,7 @@ class Scene2 extends Phaser.Scene {
                 this.beatGroup.remove(this.status);
                 this.status.destroy();
 
-            
+
             } else {
                 this.awareness += 1;
                 this.awarenessText.setText('Awareness: ' + this.awareness + '/10');
@@ -146,20 +172,20 @@ class Scene2 extends Phaser.Scene {
         // Teacher speak out loud
         if (randomNum == 3) {
             // this.beatGroup.remove(this.firstBeat);
-            this.addBeats(1300,480);
-            this.addBeats(1330,480);
-            this.addBeats(1360,480);
-            this.addBeats(1390,480);
-            
+            this.addBeats(1300, 480);
+            this.addBeats(1330, 480);
+            this.addBeats(1360, 480);
+            this.addBeats(1390, 480);
+
             randomNum = 0;
         }
 
         // Check if the beatbar overlap with the checkboxs
         //spaceDown
         if (this.physics.overlap(this.middleBox, this.beatGroup)) {
-            this.teacherOP.setAlpha(1);
+            this.teacherOP.setTexture('teacher2_speaking');
         } else {
-            this.teacherOP.setAlpha(0);
+            this.teacherOP.setTexture('teacher2_speaking2');
         }
 
         // End Condition
@@ -168,7 +194,8 @@ class Scene2 extends Phaser.Scene {
             this.scene.start("GameOver");
         }
         if (this.completeness >= 100) {
-            this.scene.start("Victory");
+            reason = "Victory"
+            this.scene.start("GameOver");
         }
     }
 }

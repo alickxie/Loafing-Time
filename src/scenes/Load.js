@@ -60,7 +60,6 @@ class Load extends Phaser.Scene {
             { key: 'trashCan-Left' },
             { key: 'trashCan-Right' },
             { key: 'trashBall' },
-            { key: 'eating' },
             { key: 'noeating' },
             { key: 'scene2(version2)' },
             { key: 'teacher-opMouse' },
@@ -69,6 +68,13 @@ class Load extends Phaser.Scene {
             { key: 'trashCan' },
             { key: 'kid' },
             { key: 'square' }
+        ]);
+        this.load.image([
+            { key: 'eating' },
+            { key: 'noeating' },
+            {key: 'teacher2_angry' },
+            {key: 'teacher2_speaking' },
+            {key: 'teacher2_speaking2'}
         ]);
 
         // this.load.spritesheet('anims_fox', 'anims_fox.png', {
@@ -96,7 +102,10 @@ class Load extends Phaser.Scene {
         }
 
         // go to Title scene
-        this.scene.start("playScene1"); 
-        // this.scene.start('menuScene');     
+        // played1 = true;
+        // played2 = true;
+        // played3 = true;
+        // this.scene.start("instruScene"); 
+        this.scene.start('menuScene');     
     }
 }

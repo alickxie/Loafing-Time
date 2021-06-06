@@ -42,12 +42,33 @@ class GameOver extends Phaser.Scene {
         const retryButton = this.add.image(centerX, 600, 'glass-panel')
             .setDisplaySize(200, 30).setInteractive()
             .on('pointerover', () => { retryButton.alpha = 0.5; ii.alpha = 0.7 })
-            .on('pointerout', () => { retryButton.alpha = 1.0; ii.alpha = 1.0  })
+            .on('pointerout', () => { retryButton.alpha = 1.0; ii.alpha = 1.0 })
             .on('pointerup', () => {
                 this.sound.play("select_music", { volume: 2.0 });
                 this.scene.start(currentScene);
             });
 
+        let iii = this.add.text(centerX, 650, '[   Next   ]', creditConfig)
+            .setOrigin(0.5)
+
+        const nextButton = this.add.image(centerX, 650, 'glass-panel')
+            .setDisplaySize(200, 30).setInteractive()
+            .on('pointerover', () => { nextButton.alpha = 0.5; iii.alpha = 0.7 })
+            .on('pointerout', () => { nextButton.alpha = 1.0; iii.alpha = 1.0 })
+            .on('pointerup', () => {
+                this.sound.play("select_music", { volume: 2.0 });
+                // if(currentScene == "playScene1"){
+                //     this.scene.start('playScene2');
+                // }else if(currentScene == 'playScene2'){
+                //     this.scene.start('playScene');
+                // }else if(currentScene == 'playScene'){
+                //     this.scene.start('Victory');
+                // }
+                if(played1*played2*played3==true){
+                    this.scene.start('Victory');
+                }
+                this.scene.start('instruScene');
+            });
 
 
         creditConfig = {

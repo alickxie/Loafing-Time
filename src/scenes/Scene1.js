@@ -6,6 +6,11 @@ class Scene1 extends Phaser.Scene {
     }
 
     create() {
+        currentScene = "playScene1";
+        // if(played1 == false){
+        //     this.scene.launch('instruScene')
+        //     this.scene.pause();
+        // }
         this.score = 0;
         this.t = 0;
         this.fire = false;
@@ -19,7 +24,6 @@ class Scene1 extends Phaser.Scene {
 
 
         this.pointer = this.input.activePointer;
-        currentScene = "playScene1";
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.mouse = this.input.mousePointer;
 
@@ -33,12 +37,38 @@ class Scene1 extends Phaser.Scene {
             .setInteractive().on('pointerup', () => {
                 console.log("x:", this.input.x, "y:", this.input.y)
             });
+            //buttons:
+        const pauseButton = this.add.image(100, 50, 'glass-panel')
+            .setDisplaySize(150, 50).setInteractive()
+            .on('pointerover', () => { pauseButton.alpha = 0.5 })
+            .on('pointerout', () => { pauseButton.alpha = 1.0 })
+            .on('pointerup', () => {
+                this.sound.play("select_music", { volume: 2.0 });
+                
+                this.scene.launch('Pause')
+                this.scene.pause();
+            });
+
+        this.add.text(pauseButton.x, pauseButton.y, 'Pause')
+            .setOrigin(0.5).setColor('#ff');
+
+        const settingsButton = this.add.image(100, 120, 'glass-panel')
+            .setDisplaySize(150, 50).setInteractive()
+            .on('pointerover', () => { settingsButton.alpha = 0.5 })
+            .on('pointerout', () => { settingsButton.alpha = 1.0 })
+            .on('pointerup', () => {
+                this.sound.play("select_music", { volume: 2.0 });
+                this.scene.start("menuScene");
+            });
+
+        this.add.text(settingsButton.x, settingsButton.y, 'Menu')
+            .setOrigin(0.5).setColor('#ff');
         // this.arm = this.add.sprite();
         this.arm = this.add.sprite(1180, 570, 'arm').setOrigin(0, 1).setScale(0.8).setAlpha(0);
         this.trashCan = this.add.sprite(380, 720, 'trashCan').setOrigin(0, 1).setScale(0.7).setAlpha(0.7);
         this.kid = this.add.sprite(1050, 720, 'kid').setOrigin(0, 1).setScale(1).setAlpha(1);
-        
-        this.desk = this.physics.add.sprite(227, 410, 'desk1').setOrigin(0, 0).setScale(1.28,1.82);
+
+        this.desk = this.physics.add.sprite(227, 410, 'desk1').setOrigin(0, 0).setScale(1.28, 1.82);
         this.desk.setImmovable(true);
         this.desk.alpha = 0;
         this.desk.body.setAllowGravity(false);
@@ -47,12 +77,12 @@ class Scene1 extends Phaser.Scene {
         this.base.setAlpha(0);
         this.base.body.setAllowGravity(false);
 
-        this.left = this.physics.add.sprite(394, 667, 'trashCan-Left').setOrigin(0.5, 0.5).setScale(1,1.82);
-        
+        this.left = this.physics.add.sprite(394, 667, 'trashCan-Left').setOrigin(0.5, 0.5).setScale(1, 1.82);
+
         this.left.setVisible(false);
         this.left.setImmovable(true);
         this.left.body.setAllowGravity(false);
-        this.right = this.physics.add.sprite(468, 667, 'trashCan-Right').setOrigin(0.5, 0.5).setScale(1,1.82);
+        this.right = this.physics.add.sprite(468, 667, 'trashCan-Right').setOrigin(0.5, 0.5).setScale(1, 1.82);
         // this.right.setAngle(13.5); 
         this.right.setVisible(false);
         this.right.setImmovable(true);
@@ -69,7 +99,7 @@ class Scene1 extends Phaser.Scene {
         this.student.setAlpha(0);
         this.student1 = this.add.sprite(680, 438, 'girl').setOrigin(0.0).setScale(1.1);
         this.student1.setAlpha(1.0);
-        
+
         //blocks:
         this.checker = this.physics.add.sprite(397, 660, 'trashCan-Base').setOrigin(0, 0).setScale(1.5);
         this.checker.setImmovable(true);
@@ -90,7 +120,7 @@ class Scene1 extends Phaser.Scene {
         this.airBlock.setImmovable(true);
         this.airBlock.body.setAllowGravity(false);
         this.airBlock.setVisible(false);
-
+            
         this.Box.fillStyle(0x222222, 0.8);
         this.Box.fillRect(1190, 30, 50, 320);
 
@@ -152,7 +182,7 @@ class Scene1 extends Phaser.Scene {
     }
 
     update() {
-        if(this.warn>0){
+        if (this.warn > 0) {
             this.WarningText.setText('Warning: ' + this.warn + '/ 3');
         }
 
@@ -171,7 +201,7 @@ class Scene1 extends Phaser.Scene {
             this.arm.setRotation(angle - 60);
         }
 
-        if (randomNum == 5 &&!this.turn){
+        if (randomNum == 5 && !this.turn) {
             console.log("Here");
             this.turnAround();
         }
@@ -180,7 +210,7 @@ class Scene1 extends Phaser.Scene {
         if (watch == true && this.fire == true) {
             console.log('Warnning')
             this.warn += 1;
-            
+
             if (this.warn >= 3) {
                 reason = "caught by teacher"
                 this.scene.start("GameOver");
@@ -211,7 +241,7 @@ class Scene1 extends Phaser.Scene {
                 this.checker.enableBody();
             }
             this.trashBall = this.physics.add.sprite(1280, 470, 'trashBall').setOrigin(0.5).setScale(0.6).setBounce(0.2);
-            this.trashBall.setSize(20, 20 , false); 
+            this.trashBall.setSize(20, 20, false);
             this.physics.add.collider(this.desk, this.trashBall);
             this.physics.add.collider(this.left, this.trashBall);
             this.physics.add.collider(this.right, this.trashBall);
@@ -249,7 +279,8 @@ class Scene1 extends Phaser.Scene {
         }
 
         if (this.score >= 10) {
-            this.scene.start("Victory");
+            reason = "Victory!";
+            this.scene.start("GameOver");
         }
 
         if (sanity < 1) {

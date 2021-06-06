@@ -35,27 +35,31 @@ class Menu extends Phaser.Scene {
             .on('pointerout', () => { playButton.alpha = 1.0 })
             .on('pointerup', () => {
                 this.sound.play("select_music", { volume: 2.0 });
-                this.scene.start("menuScene2");
+                if(played1*played2*played3 == true){
+                    this.scene.start("menuScene2");
+                }
+                this.scene.start("instruScene");
             });
 
         this.add.text(playButton.x, playButton.y, 'Play')
             .setOrigin(0.5)
 
         // Settings button
-        const settingsButton = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'glass-panel')
-            .setDisplaySize(150, 50).setInteractive()
-            .on('pointerover', () => { settingsButton.alpha = 0.5 })
-            .on('pointerout', () => { settingsButton.alpha = 1.0 })
-            .on('pointerup', () => {
-                this.sound.play("select_music", { volume: 2.0 });
-                this.scene.start("instruScene");
-            });
+        // const settingsButton = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'glass-panel')
+        //     .setDisplaySize(150, 50).setInteractive()
+        //     .on('pointerover', () => { settingsButton.alpha = 0.5 })
+        //     .on('pointerout', () => { settingsButton.alpha = 1.0 })
+        //     .on('pointerup', () => {
+        //         this.sound.play("select_music", { volume: 2.0 });
+        //         console.log(settingsButton.x,settingsButton.y)
+        //         this.scene.start("instruScene");
+        //     });
 
-        this.add.text(settingsButton.x, settingsButton.y, 'instruction')
-            .setOrigin(0.5)
+        // this.add.text(settingsButton.x, settingsButton.y, 'instruction')
+        //     .setOrigin(0.5)
 
         // Credits button
-        const creditsButton = this.add.image(settingsButton.x, settingsButton.y + settingsButton.displayHeight + 10, 'glass-panel')
+        const creditsButton = this.add.image(640, 492, 'glass-panel')
             .setDisplaySize(150, 50).setInteractive()
             .on('pointerover', () => { creditsButton.alpha = 0.5 })
             .on('pointerout', () => { creditsButton.alpha = 1.0 })

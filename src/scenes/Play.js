@@ -6,6 +6,8 @@ class Play extends Phaser.Scene {
 
     // Create object in Playscene
     create() {
+        indoor = false;
+        played3 = true;
         // The global variable.
         reason = "No Reason."
         gameScore = 0;
@@ -87,6 +89,31 @@ class Play extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+        const pauseButton = this.add.image(100, 50, 'glass-panel')
+            .setDisplaySize(150, 50).setInteractive()
+            .on('pointerover', () => { pauseButton.alpha = 0.5 })
+            .on('pointerout', () => { pauseButton.alpha = 1.0 })
+            .on('pointerup', () => {
+                this.sound.play("select_music", { volume: 2.0 });
+
+                this.scene.launch('Pause')
+                this.scene.pause();
+            });
+
+        this.add.text(pauseButton.x, pauseButton.y, 'Pause')
+            .setOrigin(0.5).setColor('#ff');
+
+        const settingsButton = this.add.image(100, 120, 'glass-panel')
+            .setDisplaySize(150, 50).setInteractive()
+            .on('pointerover', () => { settingsButton.alpha = 0.5 })
+            .on('pointerout', () => { settingsButton.alpha = 1.0 })
+            .on('pointerup', () => {
+                this.sound.play("select_music", { volume: 2.0 });
+                this.scene.start("menuScene");
+            });
+
+        this.add.text(settingsButton.x, settingsButton.y, 'Menu')
+            .setOrigin(0.5).setColor('#ff');
     }
 
     // rando function to get random number from (0-9)
@@ -271,7 +298,8 @@ class Play extends Phaser.Scene {
             // Player win the game 
         } else if (gameScore >= 100) {
             this.backgroundMusic.stop();
-            this.scene.start("Victory");
+            reason = 'Victory';
+            this.scene.start("GameOver");
         }
     }
 }
