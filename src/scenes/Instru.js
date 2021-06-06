@@ -195,7 +195,7 @@ class Instru extends Phaser.Scene {
             if (this.count == 5) {
                 this.colleague = this.add.sprite(600, 303, 'watching-colleague').setOrigin(0.0);
                 this.door = this.add.sprite(1120, 350, 'door').setOrigin(0.0);
-                this.add.text(859, 550, "                  -->\nBecareful with your Colleague\nand Manager too!", credit2Config)
+                this.add.text(859, 550, "                  -->\nBe careful with your Colleague\nand Manager too!", credit2Config)
             }
             if (this.count == 6) {
                 this.add.text(430, 230, "Let's Go!", menu1Config);
