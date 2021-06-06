@@ -212,6 +212,7 @@ class Scene1 extends Phaser.Scene {
             this.warn += 1;
 
             if (this.warn >= 3) {
+                performance1 =this.score*10;
                 reason = "caught by teacher"
                 this.scene.start("GameOver");
             }
@@ -220,6 +221,7 @@ class Scene1 extends Phaser.Scene {
 
         // ClassMate report
         if (this.warn >= 3 && this.temper >= 10) {
+            performance1 =this.score*10;
             reason = "classmate report to teacher"
             this.scene.start("GameOver");
         } else if (this.temper == 7) {
@@ -279,11 +281,14 @@ class Scene1 extends Phaser.Scene {
         }
 
         if (this.score >= 10) {
+            performance1 = 100;
             reason = "Victory!";
             this.scene.start("GameOver");
         }
+        
 
         if (sanity < 1) {
+            performance1 = this.score;
             reason = "Time Out!";
             this.scene.start("GameOver");
         }

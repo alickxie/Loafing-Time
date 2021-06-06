@@ -157,6 +157,7 @@ class Play extends Phaser.Scene {
                 reason = "You are Institutionalized!"
                 this.boss.destroy();
                 this.text.destroy();
+                performance3 = gameScore;
                 this.scene.start("GameOver");
             }
 
@@ -218,6 +219,7 @@ class Play extends Phaser.Scene {
                     reason = "You are caught by your Boss!"
                     this.boss.destroy();
                     this.text.destroy();
+                    performance3 = gameScore;
                     this.scene.start("GameOver");
 
                 }
@@ -278,6 +280,7 @@ class Play extends Phaser.Scene {
                     this.text.destroy();
                     this.boss.destroy();
                     watch = false;
+                    performance3 = gameScore;
                     this.scene.start("GameOver");
                 }, null, this);
             }
@@ -292,6 +295,7 @@ class Play extends Phaser.Scene {
                     this.text.destroy();
                     this.boss.destroy();
                     indoor = false;
+                    performance3 = gameScore;
                     this.scene.start("GameOver");
                 }, null, this);
             }
@@ -299,6 +303,7 @@ class Play extends Phaser.Scene {
         } else if (gameScore >= 100) {
             this.backgroundMusic.stop();
             reason = 'Victory';
+            performance3 = gameScore;
             this.scene.start("GameOver");
         }
     }

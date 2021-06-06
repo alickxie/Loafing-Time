@@ -23,6 +23,18 @@ class GameOver extends Phaser.Scene {
             align: 'left',
             fixedWidth: 0,
         }
+        if(currentScene =='playScene1'){
+
+            this.add.text(centerX, 400, '[ Kindergarten Score: '+performance1+' ]', creditConfig).setOrigin(0.5);
+        }
+        if(currentScene =='playScene2'){
+            
+            this.add.text(centerX, 400, '[ High School Score: '+performance2+' ]', creditConfig).setOrigin(0.5);
+        }
+        if(currentScene =='playScene'){
+            
+            this.add.text(centerX, 400, '[ Ault Score: '+performance3+' ]', creditConfig).setOrigin(0.5);
+        }
         let i = this.add.text(centerX, 550, '[   Menu   ]', creditConfig)
             .setOrigin(0.5)
 
@@ -64,7 +76,7 @@ class GameOver extends Phaser.Scene {
                 // }else if(currentScene == 'playScene'){
                 //     this.scene.start('Victory');
                 // }
-                if(played1*played2*played3==true){
+                if(played1==true&&played2==true&&played3==true){
                     this.scene.start('Victory');
                 }
                 this.scene.start('instruScene');

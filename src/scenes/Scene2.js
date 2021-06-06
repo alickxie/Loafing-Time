@@ -191,9 +191,11 @@ class Scene2 extends Phaser.Scene {
         // End Condition
         if (this.awareness >= 10) {
             reason = "caught by teacher"
+            performance2 = this.completeness;
             this.scene.start("GameOver");
         }
         if (this.completeness >= 100) {
+            performance2 = this.completeness;
             reason = "Victory"
             this.scene.start("GameOver");
         }
