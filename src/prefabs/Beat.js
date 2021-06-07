@@ -9,7 +9,7 @@ class Beat extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);       // add physics body
         this.setVelocityX(velocity);            // make it go!
         this.setImmovable(true);
-        this.score = true;
+        this.score = false;
         this.body.setAllowGravity(false);
     }
 

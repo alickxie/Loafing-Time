@@ -23,14 +23,27 @@ class Pause extends Phaser.Scene {
             .on('pointerup', () => {
                 this.sound.play("select_music", { volume: 2.0 });
                 this.scene.resume(currentScene);
+                // if(currentScene =='playScene1'){
+                    
+                // }
                 this.scene.stop();
             });
 
         this.add.text(pauseButton.x, pauseButton.y, 'Continue')
             .setOrigin(0.5).setColor('#ff');
 
-        this.add.text(centerX, 420, '[ Press (M) to Menu]', creditConfig).setOrigin(0.5);
-        this.add.text(centerX, 380, '[ Press (R) for Retry]', creditConfig).setOrigin(0.5);
+            const retryButton = this.add.image(centerX, centerY + 100, 'retryButton')
+            .setDisplaySize(128, 40).setInteractive()
+            .on('pointerover', () => { retryButton.alpha = 0.7 })
+            .on('pointerout', () => { retryButton.alpha = 1.0 })
+            .on('pointerup', () => {
+                retryButton.setTexture('retryButton(Pressed)');
+                this.sound.play("select_music", { volume: 2.0 });
+
+                this.clock = this.time.delayedCall(250, () => {
+                    this.scene.start(currentScene);
+                }, null, this);
+            });
 
         creditConfig = {
             color: '#CD00CD',
@@ -48,10 +61,6 @@ class Pause extends Phaser.Scene {
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(keyM)) {
-            this.sound.play("select_music", { volume: 2.0 });
-            this.scene.start("menuScene");
-        }
         if (Phaser.Input.Keyboard.JustDown(keyR)) {
             this.sound.play("select_music", { volume: 2.0 });
             this.scene.start(currentScene);

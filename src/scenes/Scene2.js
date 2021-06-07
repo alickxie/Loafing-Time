@@ -10,10 +10,17 @@ class Scene2 extends Phaser.Scene {
         this.value = 0;
         this.awareness = 0;
         this.completeness = 0;
-
+        //open mouth
+        this.open = false;
         // Add Keybind into the scene
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
+        //add bgm
+        this.bgm2 = this.sound.add('High_school', { mute: false, volume: 0.35, rate: 1.0, loop: true });
+        this.bgm2.play();
+        this.events.on('pause', () => { this.bgm2.stop() });
+        this.events.on('shutdown', () => { this.bgm2.stop() });
+        this.events.on('resume', () => { this.bgm2.play() });
         // Add different sprite image into the scene
         this.background = this.add.sprite(0, 0, 'scene2(version2)').setScale(1.0).setOrigin(0.0)
             .setInteractive().on('pointerup', () => {
@@ -23,28 +30,28 @@ class Scene2 extends Phaser.Scene {
         this.teacherOP = this.add.sprite(648, 389, 'teacher2_speaking').setScale(1).setOrigin(0.5, 0.5);
 
         //Add checkBox to the world
-        this.middleBox = this.physics.add.sprite(645, 480, 'square').setScale(0.05, 0.2);
+        this.middleBox = this.physics.add.sprite(645+20, 480, 'square').setScale(0.05, 0.2);
         this.middleBox.setAlpha(0.3);
         this.middleBox.setImmovable(true);
         this.middleBox.body.setAllowGravity(false);
 
-        this.leftBox = this.physics.add.sprite(602, 480, 'square').setScale(0.05, 0.2);
+        this.leftBox = this.physics.add.sprite(602+20, 480, 'square').setScale(0.05, 0.2);
         this.leftBox.setAlpha(0.3);
         this.leftBox.setImmovable(true);
         this.leftBox.body.setAllowGravity(false);
 
-        this.rightBox = this.physics.add.sprite(688, 480, 'square').setScale(0.05, 0.2);
+        this.rightBox = this.physics.add.sprite(688+20, 480, 'square').setScale(0.05, 0.2);
         this.rightBox.setAlpha(0.3);
         this.rightBox.setImmovable(true);
         this.rightBox.body.setAllowGravity(false);
 
-        this.killBox = this.physics.add.sprite(580, 480, 'square').setScale(0.05, 0.2);
+        this.killBox = this.physics.add.sprite(580+20, 480, 'square').setScale(0.05, 0.2);
         this.killBox.setAlpha(0);
         this.killBox.setImmovable(true);
         this.killBox.body.setAllowGravity(false);
 
         // Add text UI into the scene
-        this.completenessText = this.add.text(150, 560, `Chips Left: %${this.completeness}`, {
+        this.completenessText = this.add.text(150, 560, `Finish Chips: %${this.completeness}`, {
             fontFamily: 'Pangolin',
             fontSize: '30px',
             color: '#FF0000 ',
@@ -123,9 +130,23 @@ class Scene2 extends Phaser.Scene {
 
             this.player.setTexture('eating');
             this.value = 0;
+            //chips
+            let r = Math.floor((Math.random() * 3));
+                if (r == 0) {
+                    this.sound.play("chips1", { volume: 1.0, rate: 1.3 });
+                } else if (r == 1) {
+                    this.sound.play("chips2", { volume: 1.0, rate: 1.3 });
+                } else if (r == 2) {
+                    this.sound.play("chips3", { volume: 1.0, rate: 1.5 });
+                }
 
             if (this.physics.collide(this.middleBox, this.status)) {
                 this.value = 10;
+                this.sound.play("great", { volume: 1.0, rate: 1.1, fontSize: 150 });
+                let i = this.add.text(this.status.x, this.status.y - 50, "Great!", { fontFamily: 'Courier', fontSize: 30 });
+                this.time.delayedCall(200, () => {
+                    i.destroy();
+                }, null, this);
                 this.completeness += this.value;
                 this.completenessText.setText('Chips Left: ' + '%' + this.completeness);
                 this.beatGroup.remove(this.status);
@@ -133,6 +154,11 @@ class Scene2 extends Phaser.Scene {
 
             } else if (this.physics.collide(this.leftBox, this.status)) {
                 this.value = 5;
+                this.sound.play("good", { volume: 1.0, rate: 1.1, fontSize: 150 });
+                let i = this.add.text(this.status.x, this.status.y - 50, "Good!", { fontFamily: 'Courier', fontSize: 30 });
+                this.time.delayedCall(200, () => {
+                    i.destroy();
+                }, null, this);
                 this.completeness += 5;
                 this.completenessText.setText('Chips Left: ' + '%' + this.completeness);
                 this.beatGroup.remove(this.status);
@@ -140,6 +166,11 @@ class Scene2 extends Phaser.Scene {
 
             } else if (this.physics.collide(this.rightBox, this.status)) {
                 this.value = 5;
+                this.sound.play("good", { volume: 1.0, rate: 1.1, });
+                let i = this.add.text(this.status.x, this.status.y - 50, "Good!", { fontFamily: 'Courier', fontSize: 30 });
+                this.time.delayedCall(200, () => {
+                    i.destroy();
+                }, null, this);
                 this.completeness += 5;
                 this.completenessText.setText('Chips Left: ' + '%' + this.completeness);
                 this.beatGroup.remove(this.status);
@@ -147,6 +178,11 @@ class Scene2 extends Phaser.Scene {
 
 
             } else {
+                this.sound.play("miss", { volume: 0.3, rate: 1.5 });
+                let i = this.add.text(930, 400, "Miss!", { fontFamily: 'Courier', fontSize: 100 });
+                this.time.delayedCall(200, () => {
+                    i.destroy();
+                }, null, this);
                 this.awareness += 1;
                 this.awarenessText.setText('Awareness: ' + this.awareness + '/10');
             }
@@ -182,8 +218,32 @@ class Scene2 extends Phaser.Scene {
 
         // Check if the beatbar overlap with the checkboxs
         //spaceDown
-        if (this.physics.overlap(this.middleBox, this.beatGroup)) {
+        if (this.physics.overlap(this.middleBox, this.beatGroup.getFirstAlive())) {
             this.teacherOP.setTexture('teacher2_speaking');
+            if (this.beatGroup.getFirstAlive().score == false) {
+                let r = Math.floor((Math.random() * 9));
+                this.beatGroup.getFirstAlive().score = true;
+                // console.log('r: ', r);
+                if (r == 0) {
+                    this.sound.play("a", { volume: 1.0, rate: 1 });
+                } else if (r == 1) {
+                    this.sound.play("b", { volume: 1.0, rate: 1 });
+                } else if (r == 2) {
+                    this.sound.play("c", { volume: 1.0, rate: 1 });
+                } else if (r == 3) {
+                    this.sound.play("d", { volume: 1.0, rate: 1 });
+                } else if (r == 4) {
+                    this.sound.play("i", { volume: 1.0, rate: 1 });
+                } else if (r == 5) {
+                    this.sound.play("l", { volume: 1.0, rate: 1 });
+                } else if (r == 6) {
+                    this.sound.play("o", { volume: 1.0, rate: 1 });
+                } else if (r == 7) {
+                    this.sound.play("u", { volume: 1.0, rate: 1 });
+                } else if (r == 8) {
+                    this.sound.play("zh", { volume: 1.0, rate: 1 });
+                }
+            }
         } else {
             this.teacherOP.setTexture('teacher2_speaking2');
         }

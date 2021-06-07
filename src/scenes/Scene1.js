@@ -23,6 +23,7 @@ class Scene1 extends Phaser.Scene {
         this.turn = false;
 
 
+
         this.pointer = this.input.activePointer;
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.mouse = this.input.mousePointer;
@@ -32,37 +33,50 @@ class Scene1 extends Phaser.Scene {
 
 
 
-
+        this.bgm1 = this.sound.add('Kindergarten', { mute: false, volume: 0.35, rate: 1.0, loop: true });
+        this.bgm1.play();
+        this.events.on('pause', () => { this.bgm1.stop() });
+        this.events.on('shutdown', () => { this.bgm1.stop() });
+        this.events.on('resume', () => { this.bgm1.play() });
+        // this.sound.play('Kindergarten');
         this.background = this.add.sprite(1, 0, 'classroom').setScale(1.0).setOrigin(0.0).setDepth(-1)
             .setInteractive().on('pointerup', () => {
                 console.log("x:", this.input.x, "y:", this.input.y)
             });
-            //buttons:
-        const pauseButton = this.add.image(100, 50, 'glass-panel')
-            .setDisplaySize(150, 50).setInteractive()
+        //buttons:
+        const pauseButton = this.add.image(100, 50, 'menuButton')
+            .setDisplaySize(128, 40).setInteractive()
             .on('pointerover', () => { pauseButton.alpha = 0.5 })
             .on('pointerout', () => { pauseButton.alpha = 1.0 })
             .on('pointerup', () => {
+                pauseButton.setTexture('menuButton(Pressed)');
                 this.sound.play("select_music", { volume: 2.0 });
-                
                 this.scene.launch('Pause')
+                this.sound.stopAll();
                 this.scene.pause();
             });
+
 
         this.add.text(pauseButton.x, pauseButton.y, 'Pause')
             .setOrigin(0.5).setColor('#ff');
 
-        const settingsButton = this.add.image(100, 120, 'glass-panel')
-            .setDisplaySize(150, 50).setInteractive()
-            .on('pointerover', () => { settingsButton.alpha = 0.5 })
-            .on('pointerout', () => { settingsButton.alpha = 1.0 })
+        // Credits button
+        const menuButton = this.add.image(100, 120, 'menuButton')
+            .setDisplaySize(128, 40).setInteractive()
+            .on('pointerover', () => { menuButton.alpha = 0.7 })
+            .on('pointerout', () => { menuButton.alpha = 1.0 })
             .on('pointerup', () => {
+                menuButton.setTexture('menuButton(Pressed)');
                 this.sound.play("select_music", { volume: 2.0 });
-                this.scene.start("menuScene");
+                played1 = false;
+                played2 = false;
+                played3 = false;
+                this.clock = this.time.delayedCall(250, () => {
+                    this.scene.start("menuScene");
+                }, null, this);
             });
 
-        this.add.text(settingsButton.x, settingsButton.y, 'Menu')
-            .setOrigin(0.5).setColor('#ff');
+
         // this.arm = this.add.sprite();
         this.arm = this.add.sprite(1180, 570, 'arm').setOrigin(0, 1).setScale(0.8).setAlpha(0);
         this.trashCan = this.add.sprite(380, 720, 'trashCan').setOrigin(0, 1).setScale(0.7).setAlpha(0.7);
@@ -120,7 +134,7 @@ class Scene1 extends Phaser.Scene {
         this.airBlock.setImmovable(true);
         this.airBlock.body.setAllowGravity(false);
         this.airBlock.setVisible(false);
-            
+
         this.Box.fillStyle(0x222222, 0.8);
         this.Box.fillRect(1190, 30, 50, 320);
 
@@ -172,6 +186,7 @@ class Scene1 extends Phaser.Scene {
         this.turn = true;
         this.teacher.alpha = 1;
         this.teacher1.setAlpha(0);
+        this.sound.play("teacher2", { volume: 1.0 });
         watch = true;
         this.time.delayedCall(2000, () => {
             this.teacher.setAlpha(0.0);
@@ -182,6 +197,7 @@ class Scene1 extends Phaser.Scene {
     }
 
     update() {
+
         if (this.warn > 0) {
             this.WarningText.setText('Warning: ' + this.warn + '/ 3');
         }
@@ -212,8 +228,9 @@ class Scene1 extends Phaser.Scene {
             this.warn += 1;
 
             if (this.warn >= 3) {
-                performance1 =this.score*10;
+                performance1 = this.score * 10;
                 reason = "caught by teacher"
+                this.sound.play("teacher", { volume: 1.0 });
                 this.scene.start("GameOver");
             }
             watch = false;
@@ -221,8 +238,9 @@ class Scene1 extends Phaser.Scene {
 
         // ClassMate report
         if (this.warn >= 3 && this.temper >= 10) {
-            performance1 =this.score*10;
+            performance1 = this.score * 10;
             reason = "classmate report to teacher"
+            this.sound.play("teacher", { volume: 1.0 });
             this.scene.start("GameOver");
         } else if (this.temper == 7) {
             this.warn += 1;
@@ -242,8 +260,11 @@ class Scene1 extends Phaser.Scene {
             if (!this.checker.enableBody()) {
                 this.checker.enableBody();
             }
+            this.sound.play("throw", { volume: 0.8 });
+
             this.trashBall = this.physics.add.sprite(1280, 470, 'trashBall').setOrigin(0.5).setScale(0.6).setBounce(0.2);
             this.trashBall.setSize(20, 20, false);
+
             this.physics.add.collider(this.desk, this.trashBall);
             this.physics.add.collider(this.left, this.trashBall);
             this.physics.add.collider(this.right, this.trashBall);
@@ -252,6 +273,9 @@ class Scene1 extends Phaser.Scene {
             this.physics.add.collider(this.airBlock1, this.trashBall, () => {
                 this.student.alpha = 1;
                 this.student1.setAlpha(0);
+                this.sound.play("girl", { volume: 1.0 });
+
+
                 indoor = true;
                 console.log('Yu Men')
                 this.temper += 1;
@@ -265,7 +289,14 @@ class Scene1 extends Phaser.Scene {
                 this.turnAround();
             });
             this.physics.add.overlap(this.checker, this.trashBall, () => {
+
                 this.score += 1;
+                //randomly choose sound effect between goal1 and goal2
+                if (Math.floor((Math.random() * 2)) == 1) {
+                    this.sound.play("goal2", { volume: 2.0 });
+                } else {
+                    this.sound.play("goal1", { volume: 2.0 });
+                }
                 this.ScoreText.setText('Score: ' + this.score + ' / 10');
                 console.log(this.score);
                 this.checker.disableBody();
@@ -285,7 +316,7 @@ class Scene1 extends Phaser.Scene {
             reason = "Victory!";
             this.scene.start("GameOver");
         }
-        
+
 
         if (sanity < 1) {
             performance1 = this.score;

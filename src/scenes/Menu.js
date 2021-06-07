@@ -8,7 +8,7 @@ class Menu extends Phaser.Scene {
     create() {
         //UI
         let menuConfig = {
-            fontFamily: 'Pangolin',
+            fontFamily: 'Minecraftia',
             fontSize: '130px',
             color: '#FFFF00',
             stroke: '#99BF0D',
@@ -26,52 +26,40 @@ class Menu extends Phaser.Scene {
         // Adding the Title text
         this.add.text(centerX, centerY - 100, 'Loafing Time', menuConfig).setOrigin(0.5);
 
-        //place background
+        //The Play Button
         this.input.setDefaultCursor('url(/assets/image/hand.png), pointer');
         const { width, height } = this.scale
-        const playButton = this.add.image(width * 0.5, height * 0.6, 'glass-panel')
-            .setDisplaySize(150, 50).setInteractive()
-            .on('pointerover', () => { playButton.alpha = 0.5 })
+        const playButton = this.add.image(width * 0.5, height * 0.65, 'playButton')
+            .setDisplaySize(170, 90).setInteractive()
+            .on('pointerover', () => { playButton.alpha = 0.7 })
             .on('pointerout', () => { playButton.alpha = 1.0 })
             .on('pointerup', () => {
+                playButton.setTexture('playButton(Pressed)');
                 this.sound.play("select_music", { volume: 2.0 });
-                if(played1*played2*played3 == true){
-                    this.scene.start("menuScene2");
-                }
-                this.scene.start("instruScene");
+
+                this.clock = this.time.delayedCall(250, () => {
+                    if (played1 * played2 * played3 == true) {
+                        this.scene.start("menuScene2");
+                    }
+                    this.scene.start("instruScene");
+                }, null, this);
             });
-
-        this.add.text(playButton.x, playButton.y, 'Play')
-            .setOrigin(0.5)
-
-        // Settings button
-        // const settingsButton = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'glass-panel')
-        //     .setDisplaySize(150, 50).setInteractive()
-        //     .on('pointerover', () => { settingsButton.alpha = 0.5 })
-        //     .on('pointerout', () => { settingsButton.alpha = 1.0 })
-        //     .on('pointerup', () => {
-        //         this.sound.play("select_music", { volume: 2.0 });
-        //         console.log(settingsButton.x,settingsButton.y)
-        //         this.scene.start("instruScene");
-        //     });
-
-        // this.add.text(settingsButton.x, settingsButton.y, 'instruction')
-        //     .setOrigin(0.5)
 
         // Credits button
-        const creditsButton = this.add.image(640, 492, 'glass-panel')
-            .setDisplaySize(150, 50).setInteractive()
-            .on('pointerover', () => { creditsButton.alpha = 0.5 })
+        const creditsButton = this.add.image(640, 610, 'creditsButton')
+            .setDisplaySize(128, 40).setInteractive()
+            .on('pointerover', () => { creditsButton.alpha = 0.7 })
             .on('pointerout', () => { creditsButton.alpha = 1.0 })
             .on('pointerup', () => {
+                creditsButton.setTexture('creditsButton(Pressed)');
                 this.sound.play("select_music", { volume: 2.0 });
-                this.scene.start("creditScene");
+
+                this.clock = this.time.delayedCall(250, () => {
+                    this.scene.start("creditScene");
+                }, null, this);
             });
 
-        this.add.text(creditsButton.x, creditsButton.y, 'Credits')
-            .setOrigin(0.5)
-
-        // Get the key
+        // Get the keyboard
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -79,7 +67,6 @@ class Menu extends Phaser.Scene {
     }
 
     update() {
-
     }
 }
 

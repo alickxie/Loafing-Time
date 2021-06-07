@@ -4,6 +4,7 @@ class GameOver extends Phaser.Scene {
     }
 
     create() {
+        
         Scene1.score = 0;
         Scene1.t = 0;
         Scene1.fire = false;
@@ -33,7 +34,7 @@ class GameOver extends Phaser.Scene {
         }
         if(currentScene =='playScene'){
             
-            this.add.text(centerX, 400, '[ Ault Score: '+performance3+' ]', creditConfig).setOrigin(0.5);
+            this.add.text(centerX, 400, '[ Adult Score: '+performance3+' ]', creditConfig).setOrigin(0.5);
         }
         let i = this.add.text(centerX, 550, '[   Menu   ]', creditConfig)
             .setOrigin(0.5)
