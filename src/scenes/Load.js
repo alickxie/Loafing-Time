@@ -213,6 +213,12 @@ class Load extends Phaser.Scene {
         // played2 = true;
         // played3 = true; 
         // this.scene.start("instruScene"); 
+
+        // performance1= 30;
+        // performance2= 30;
+        // performance3= 30;
+        // this.scene.start("Victory");   
+
         this.scene.start('gameScene');
         // this.scene.start("playScene3");   
     }

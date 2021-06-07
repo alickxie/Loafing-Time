@@ -56,7 +56,7 @@ class Victory extends Phaser.Scene {
         }else if(mean>70 && mean<=105){
             this.back = this.add.sprite(0,0,'loafing_God').setOrigin(0,0);
             this.back.anims.play('loafing_God');
-            this.add.text(centerX, 200, '[ You  Are  THE  LOOOAFING  GOD!!!]', creditConfig).setOrigin(0.5);
+            this.add.text(centerX, 160, '[ You  Are  THE  LOOOAFING  GOD!!!]', creditConfig).setOrigin(0.5);
         }
        
 
