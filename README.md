@@ -1,8 +1,11 @@
-The Final Game for the UCSC CMPM 120 Class\n
+The Final Game for the UCSC CMPM 120 Class
 
-Group B-10\n
+Group B-10
 
 Member: 
-Larry Li \n
-Yufeng Xie \n
-Jiaying Hou \n
+
+Larry Li 
+
+Yufeng Xie 
+
+Jiaying Hou 
