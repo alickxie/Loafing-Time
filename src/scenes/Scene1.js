@@ -44,27 +44,24 @@ class Scene1 extends Phaser.Scene {
                 console.log("x:", this.input.x, "y:", this.input.y)
             });
         //buttons:
-        const pauseButton = this.add.image(100, 50, 'menuButton')
+        //Pause buttons:
+        const pauseButton = this.add.image(90, 40, 'pauseButton').setAlpha(0.9)
             .setDisplaySize(128, 40).setInteractive()
             .on('pointerover', () => { pauseButton.alpha = 0.5 })
-            .on('pointerout', () => { pauseButton.alpha = 1.0 })
+            .on('pointerout', () => { pauseButton.alpha = 0.9 })
             .on('pointerup', () => {
-                pauseButton.setTexture('menuButton(Pressed)');
+                pauseButton.setTexture('pauseButton(Pressed)');
                 this.sound.play("select_music", { volume: 2.0 });
                 this.scene.launch('Pause')
                 this.sound.stopAll();
                 this.scene.pause();
             });
 
-
-        this.add.text(pauseButton.x, pauseButton.y, 'Pause')
-            .setOrigin(0.5).setColor('#ff');
-
-        // Credits button
-        const menuButton = this.add.image(100, 120, 'menuButton')
+        // Menu button
+        const menuButton = this.add.image(90, 90, 'menuButton').setAlpha(0.9)
             .setDisplaySize(128, 40).setInteractive()
             .on('pointerover', () => { menuButton.alpha = 0.7 })
-            .on('pointerout', () => { menuButton.alpha = 1.0 })
+            .on('pointerout', () => { menuButton.alpha = 0.9 })
             .on('pointerup', () => {
                 menuButton.setTexture('menuButton(Pressed)');
                 this.sound.play("select_music", { volume: 2.0 });

@@ -2,7 +2,7 @@
 class Beat extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, velocity, x, y) {
         // call Phaser Physics Sprite constructor
-        super(scene, x, y, 'square');
+        super(scene, x, y, 'rhythmBar(Orange)');
         
         // set up physics sprite
         scene.add.existing(this);               // add to existing scene, displayList, updateList

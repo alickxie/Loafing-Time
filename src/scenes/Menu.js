@@ -7,25 +7,13 @@ class Menu extends Phaser.Scene {
 
     create() {
         //UI
-        let menuConfig = {
-            fontFamily: 'Minecraftia',
-            fontSize: '130px',
-            color: '#FFFF00',
-            stroke: '#99BF0D',
-            strokeThickness: 5,
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 0
-        }
-        //menu text UI
-        let centerX = game.config.width / 2;
-        let centerY = game.config.height / 2;
-
-        // Adding the Title text
-        this.add.text(centerX, centerY - 100, 'Loafing Time', menuConfig).setOrigin(0.5);
-
+        this.add.image(0, 0, 'GameBg').setOrigin(0, 0);
+        this.bgm2 = this.sound.add('High_school', { mute: false, volume: 0.35, rate: 1.0, loop: true });
+        this.bgm2.play();
+        this.events.on('pause', () => { this.bgm2.stop() });
+        this.events.on('shutdown', () => { this.bgm2.stop() });
+        this.events.on('resume', () => { this.bgm2.play() });
+        
         //The Play Button
         this.input.setDefaultCursor('url(/assets/image/hand.png), pointer');
         const { width, height } = this.scale
@@ -59,10 +47,6 @@ class Menu extends Phaser.Scene {
                 }, null, this);
             });
 
-        // Get the keyboard
-        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 
     }
 
@@ -77,72 +61,64 @@ class Menu2 extends Phaser.Scene {
     }
 
     create() {
-        //UI
-        let menuConfig = {
-            fontFamily: 'Pangolin',
-            fontSize: '130px',
-            color: '#FFFF00',
-            stroke: '#99BF0D',
-            strokeThickness: 5,
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 0
-        }
+        this.add.image(0, 0, 'GameBg').setOrigin(0, 0);
+        this.bgm2 = this.sound.add('High_school', { mute: false, volume: 0.35, rate: 1.0, loop: true });
+        this.bgm2.play();
+        this.events.on('pause', () => { this.bgm2.stop() });
+        this.events.on('shutdown', () => { this.bgm2.stop() });
+        this.events.on('resume', () => { this.bgm2.play() });
+        
 
         //menu text UI
         let centerX = game.config.width / 2;
         let centerY = game.config.height / 2;
 
         // Adding the Title text
-        this.add.text(centerX, centerY - 100, 'Loafing Time', menuConfig).setOrigin(0.5);
+        // this.add.text(centerX, centerY - 100, 'Loafing Time', menuConfig).setOrigin(0.5);
 
-        //place background
+        //place cursor
         this.input.setDefaultCursor('url(/assets/image/hand.png), pointer');
-        const { width, height } = this.scale
-        const playButton = this.add.image(width * 0.5, height * 0.6, 'glass-panel')
-            .setDisplaySize(150, 50).setInteractive()
-            .on('pointerover', () => { playButton.alpha = 0.5 })
-            .on('pointerout', () => { playButton.alpha = 1.0 })
+        // play Kindergarten Level button
+        const kingarButton = this.add.image(centerX, centerY + 50, 'kindergartenButton')
+            .setDisplaySize(128, 44).setInteractive()
+            .on('pointerover', () => { kingarButton.alpha = 0.8 })
+            .on('pointerout', () => { kingarButton.alpha = 1.0 })
             .on('pointerup', () => {
+                kingarButton.setTexture('kindergartenButton(Pressed)');
                 this.sound.play("select_music", { volume: 2.0 });
-                this.scene.start("playScene1");
+
+                this.clock = this.time.delayedCall(250, () => {
+                    this.scene.start("playScene1");
+                }, null, this);
             });
 
-        this.add.text(playButton.x, playButton.y, 'Kindergarten')
-            .setOrigin(0.5)
-
-        // Settings button
-        const settingsButton = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'glass-panel')
-            .setDisplaySize(150, 50).setInteractive()
-            .on('pointerover', () => { settingsButton.alpha = 0.5 })
-            .on('pointerout', () => { settingsButton.alpha = 1.0 })
+        // play Highschool Level button
+        const highButton = this.add.image(centerX, centerY + 110, 'highschoolButton')
+            .setDisplaySize(128, 44).setInteractive()
+            .on('pointerover', () => { highButton.alpha = 0.8 })
+            .on('pointerout', () => { highButton.alpha = 1.0 })
             .on('pointerup', () => {
+                highButton.setTexture('highschoolButton(Pressed)');
                 this.sound.play("select_music", { volume: 2.0 });
-                this.scene.start("playScene2");
+
+                this.clock = this.time.delayedCall(250, () => {
+                    this.scene.start("playScene1");
+                }, null, this);
             });
 
-        this.add.text(settingsButton.x, settingsButton.y, 'High School')
-            .setOrigin(0.5)
-
-        // Credits button
-        const creditsButton = this.add.image(settingsButton.x, settingsButton.y + settingsButton.displayHeight + 10, 'glass-panel')
-            .setDisplaySize(150, 50).setInteractive()
-            .on('pointerover', () => { creditsButton.alpha = 0.5 })
-            .on('pointerout', () => { creditsButton.alpha = 1.0 })
+        // play Office Level button
+        const officeButton = this.add.image(centerX, centerY + 170, 'officeButton')
+            .setDisplaySize(128, 44).setInteractive()
+            .on('pointerover', () => { officeButton.alpha = 0.8 })
+            .on('pointerout', () => { officeButton.alpha = 1.0 })
             .on('pointerup', () => {
+                officeButton.setTexture('officeButton(Pressed)');
                 this.sound.play("select_music", { volume: 2.0 });
-                this.scene.start("playScene");
+
+                this.clock = this.time.delayedCall(250, () => {
+                    this.scene.start("playScene");
+                }, null, this);
             });
-
-        this.add.text(creditsButton.x, creditsButton.y, 'Office')
-            .setOrigin(0.5)
-
-        // Get the key
-        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     }
 
     update() {

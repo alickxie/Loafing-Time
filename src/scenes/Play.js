@@ -119,38 +119,41 @@ class Play extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
-        const pauseButton = this.add.image(100, 50, 'glass-panel')
-            .setDisplaySize(150, 50).setInteractive()
+        //Pause buttons:
+        const pauseButton = this.add.image(90, 40, 'pauseButton').setAlpha(0.9)
+            .setDisplaySize(128, 40).setInteractive()
             .on('pointerover', () => { pauseButton.alpha = 0.5 })
-            .on('pointerout', () => { pauseButton.alpha = 1.0 })
+            .on('pointerout', () => { pauseButton.alpha = 0.9 })
             .on('pointerup', () => {
+                pauseButton.setTexture('pauseButton(Pressed)');
                 this.sound.play("select_music", { volume: 2.0 });
-
                 this.scene.launch('Pause')
+                this.sound.stopAll();
                 this.scene.pause();
             });
 
-        this.add.text(pauseButton.x, pauseButton.y, 'Pause')
-            .setOrigin(0.5).setColor('#ff');
-
-        const settingsButton = this.add.image(100, 120, 'glass-panel')
-            .setDisplaySize(150, 50).setInteractive()
-            .on('pointerover', () => { settingsButton.alpha = 0.5 })
-            .on('pointerout', () => { settingsButton.alpha = 1.0 })
+        // Menu button
+        const menuButton = this.add.image(90, 90, 'menuButton').setAlpha(0.9)
+            .setDisplaySize(128, 40).setInteractive()
+            .on('pointerover', () => { menuButton.alpha = 0.7 })
+            .on('pointerout', () => { menuButton.alpha = 0.9 })
             .on('pointerup', () => {
+                menuButton.setTexture('menuButton(Pressed)');
                 this.sound.play("select_music", { volume: 2.0 });
-                this.scene.start("menuScene");
+                played1 = false;
+                played2 = false;
+                played3 = false;
+                this.clock = this.time.delayedCall(250, () => {
+                    this.scene.start("menuScene");
+                }, null, this);
             });
-
-        this.add.text(settingsButton.x, settingsButton.y, 'Menu')
-            .setOrigin(0.5).setColor('#ff');
     }
 
     // rando function to get random number from (0-9)
     rando() {
         randomNum = Math.floor(Math.random() * 20);
     }
-    
+
 
     update() {
         // this.sound.stopAll();
@@ -207,7 +210,7 @@ class Play extends Phaser.Scene {
             } else {
                 time++;
                 if (time >= 100) {
-                    // sanity -= 2;
+                    sanity -= 2;
                     time -= 100;
                     this.SanityText.setText('Sanity: ' + sanity + ' / 100');
                     // console.log(gameScore);
@@ -289,7 +292,7 @@ class Play extends Phaser.Scene {
                     this.boss.setAlpha(0);
                 }
             }
-           
+
 
             // When we get a random number 5, we get the collegaue checking event
             if (randomNum == 5) {
@@ -325,12 +328,12 @@ class Play extends Phaser.Scene {
                     indoor = false;
                     this.door1.anims.play('closeDoor');
                 }, null, this);
-                
+
                 this.clock = this.time.delayedCall(2800, () => {
                     this.doorOpen = false;
                 }, null, this);
-                
-                
+
+
             }
 
             // If player failed to release (Space) in 0.5s, when collegaue

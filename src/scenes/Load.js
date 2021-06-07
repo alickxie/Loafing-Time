@@ -42,6 +42,7 @@ class Load extends Phaser.Scene {
         this.load.path = './assets/image/';
         this.load.image('glass-panel', 'glassPanel.png');
         this.load.image('hand', 'hand.png');
+        this.load.image('GameBg', 'GameBg.png');
         this.load.image([
             { key: 'classroom' },
             { key: 'teacher' },
@@ -53,8 +54,6 @@ class Load extends Phaser.Scene {
             { key: 'trashCan-Left' },
             { key: 'trashCan-Right' },
             { key: 'trashBall' },
-            { key: 'noeating' },
-            { key: 'scene2(version2)' },
             { key: 'teacher-opMouse' },
             { key: 'girl' },
             { key: 'girl_angry' },
@@ -63,13 +62,50 @@ class Load extends Phaser.Scene {
             { key: 'square' }
         ]);
         this.load.image([
-            { key: 'eating' },
-            { key: 'noeating' },
-            {key: 'teacher2_angry' },
-            {key: 'teacher2_speaking' },
-            {key: 'teacher2_speaking2'}
+            { key: 'transition(1)' },
+            { key: 'transition(2)' },
+            { key: 'transition(3)' },
+            { key: 'end1' },
+            { key: 'loafingGod' },
+            { key: 'normal_person' },
         ]);
-        
+        this.load.spritesheet('kin_anims', 'kin_anims.png', {
+            frameWidth: 1280,
+            frameHeight: 720,
+            starFrame: 0,
+            endFrame: 1
+        });
+        this.load.spritesheet('high_anims', 'high_anims.png', {
+            frameWidth: 1280,
+            frameHeight: 720,
+            starFrame: 0,
+            endFrame: 1
+        });
+        this.load.spritesheet('office_anims', 'office_anims.png', {
+            frameWidth: 1280,
+            frameHeight: 720,
+            starFrame: 0,
+            endFrame: 1
+        });
+        //gameover scene:
+        this.load.spritesheet('end1_animation', 'end1_animation.png', {
+            frameWidth: 1280,
+            frameHeight: 720,
+            starFrame: 0,
+            endFrame: 8
+        });
+        this.load.spritesheet('loafingGod_anims', 'loafingGod_anims.png', {
+            frameWidth: 1280,
+            frameHeight: 720,
+            starFrame: 0,
+            endFrame: 1
+        });
+        this.load.spritesheet('normal_person_anims', 'normal_person_anims.png', {
+            frameWidth: 1280,
+            frameHeight: 720,
+            starFrame: 0,
+            endFrame: 7
+        });
         this.load.path = './assets/image/office/';
         this.load.image('WorkArea', 'office.png');
         this.load.image([
@@ -101,29 +137,48 @@ class Load extends Phaser.Scene {
             endFrame: 3
         });
 
-         // Load Buttons Images
-         this.load.path = './assets/image/Buttons/';
-         this.load.image([
-             { key: 'playButton' },
-             { key: 'playButton(Pressed)' },
-             { key: 'creditsButton' },
-             { key: 'creditsButton(Pressed)' },
-             { key: 'highschoolButton' },
-             { key: 'highschoolButton(Pressed)' },
-             { key: 'kindergartenButton' },
-             { key: 'kindergartenButton(Pressed)' },
-             { key: 'menuButton' },
-             { key: 'menuButton(Pressed)' },
-             { key: 'nextButton' },
-             { key: 'nextButton(Pressed)' },
-             { key: 'officeButton' },
-             { key: 'officeButton(Pressed)' },
-             { key: 'pauseButton' },
-             { key: 'pauseButton(Pressed)' },
-             { key: 'retryButton' },
-             { key: 'retryButton(Pressed)' },
-             { key: 'spaceButton' }
-         ]);
+        this.load.path = './assets/image/highschool/';
+        this.load.image([
+            { key: 'scene2(version2)' },
+            { key: 'eating' },
+            { key: 'ear' },
+            { key: 'noeating' },
+            { key: 'musicBar' },
+            { key: 'rhythmBox' },
+            { key: 'rhythmBar(Orange)' },
+            {key: 'teacher2_angry' },
+            {key: 'teacher2_speaking' },
+            {key: 'teacher2_speaking2'}
+        ]);
+
+        // Load Buttons Images
+        this.load.path = './assets/image/Buttons/';
+        this.load.image([
+            { key: 'playButton' },
+            { key: 'playButton(Pressed)' },
+            { key: 'creditsButton' },
+            { key: 'creditsButton(Pressed)' },
+            { key: 'highschoolButton' },
+            { key: 'highschoolButton(Pressed)' },
+            { key: 'kindergartenButton' },
+            { key: 'kindergartenButton(Pressed)' },
+            { key: 'menuButton' },
+            { key: 'menuButton(Pressed)' },
+            { key: 'nextButton' },
+            { key: 'nextButton(Pressed)' },
+            { key: 'officeButton' },
+            { key: 'officeButton(Pressed)' },
+            { key: 'pauseButton' },
+            { key: 'pauseButton(Pressed)' },
+            { key: 'pauseButton' },
+            { key: 'pauseButton(Pressed)' },
+            { key: 'retryButton' },
+            { key: 'retryButton(Pressed)' },
+            { key: 'continueButton' },
+            { key: 'continueButton(Pressed)' },
+            { key: 'artHand' },
+            { key: 'spaceButton' }
+        ]);
 
         //load sounds
         this.load.path = './assets/audio/';
@@ -187,13 +242,14 @@ class Load extends Phaser.Scene {
         } else {
             console.log('Local storage not supported');
         }
-        
+
         // go to Title scene
+        // newGame = false;
         // played1 = true;
         // played2 = true;
-        // played3 = true;
+        // played3 = true; 
         // this.scene.start("instruScene"); 
-        this.scene.start('menuScene');   
+        this.scene.start('gameScene');
         // this.scene.start("playScene");   
     }
 }

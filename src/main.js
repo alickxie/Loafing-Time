@@ -24,7 +24,7 @@ let config = {
             }
         }
     },
-    scene: [Load,Scene2, Menu, Menu2, Play,Scene1, Credits, Instru, GameOver, Victory, Pause]
+    scene: [Load,Game,Scene2, Menu, Menu2, Play,Scene1, Credits, Instru, GameOver, Victory, Pause]
 };
 
 let game = new Phaser.Game(config);
@@ -58,3 +58,4 @@ let performance3;
 let played1 = false;
 let played2 = false;
 let played3 = false;
+let newGame = true;
