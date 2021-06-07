@@ -20,7 +20,7 @@ class Scene2 extends Phaser.Scene {
 
         this.background = this.add.sprite(0, 0, 'scene2(version2)').setScale(1.0).setOrigin(0.0)
             .setInteractive().on('pointerup', () => {
-                console.log("x:", this.input.x, "y:", this.input.y);
+                // console.log("x:", this.input.x, "y:", this.input.y);
             });
         this.musicBar = this.add.sprite(0, 480, 'musicBar').setScale(1.0, 0.8).setOrigin(0, 0).setAlpha(0.5);
         this.player = this.add.sprite(648, 360, 'noeating').setScale(1.0).setOrigin(0.5, 0.5);
@@ -129,7 +129,7 @@ class Scene2 extends Phaser.Scene {
 
     rando() {
         randomNum = Math.floor(Math.random() * 6);
-        console.log(randomNum);
+        // console.log(randomNum);
     }
 
     update() {
@@ -211,7 +211,7 @@ class Scene2 extends Phaser.Scene {
         }
         if (this.physics.collide(this.killBox, this.status)) {
             this.beatGroup.kill(this.status);
-            console.log('killed')
+            // console.log('killed')
         }
 
         // Teacher speak out loud

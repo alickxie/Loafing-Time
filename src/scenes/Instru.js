@@ -60,8 +60,6 @@ class Instru extends Phaser.Scene {
             this.background = this.add.sprite(0, 0, 'WorkArea').setScale(1.0).setOrigin(0.0).setDepth(0).setAlpha(0.5)
                 .setInteractive().on('pointerup', () => {
                     this.count += 1;
-                    console.log("x:", this.input.x, "y:", this.input.y, "Count: ", this.count);
-
                     this.nextline();
                 });
             this.add.text(centerX, centerY - 300, 'You  are  Now  A  Happy  Work-man !', menu1Config).setOrigin(0.5);

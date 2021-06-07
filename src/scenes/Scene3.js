@@ -155,7 +155,7 @@ class Scene3 extends Phaser.Scene {
         // this.sound.stopAll();
         //     // Click the reveal the x & y postions
         if (this.mouse.isDown) {
-            console.log("x: ", this.input.x, "y: ", this.input.y);
+            // console.log("x: ", this.input.x, "y: ", this.input.y);
         }
 
         // Game Loop
@@ -171,14 +171,14 @@ class Scene3 extends Phaser.Scene {
 
                 playGame = true;
                 this.computerScreen.setTexture('game-screen');
-                console.log("Playing: ", playGame);
+                // console.log("Playing: ", playGame);
             } else if (Phaser.Input.Keyboard.JustUp(keySPACE)) {
                 playGame = false;
                 this.backgroundMusic.stop();
                 this.backgroundMusic = this.sound.add('workBgm', { mute: false, volume: 0.5, rate: 1, loop: true });
                 this.backgroundMusic.play();
                 this.computerScreen.setTexture('work-screen');
-                console.log("Playing: ", playGame);
+                // console.log("Playing: ", playGame);
             }
 
             // If the current score less than 1, Gameover
@@ -201,7 +201,7 @@ class Scene3 extends Phaser.Scene {
                     time -= 100;
                     this.Bar.fillStyle(0x00ff00, 1);
                     this.Bar.fillRect(500, 60, 3 * gameScore, 30);
-                    console.log(gameScore);
+                    // console.log(gameScore);
                 }
             } else {
                 time++;
@@ -264,7 +264,7 @@ class Scene3 extends Phaser.Scene {
             //then start to check play game
             if (this.boss.watch == true && playGame == true) {
                 this.boss.setTexture('boss_angry');
-                console.log('you are dead')
+                // console.log('you are dead')
                 this.backgroundMusic.stop();
                 reason = "You are caught by your Boss!"
                 // this.boss.destroy();

@@ -41,7 +41,6 @@ class Scene1 extends Phaser.Scene {
         // this.sound.play('Kindergarten');
         this.background = this.add.sprite(1, 0, 'classroom').setScale(1.0).setOrigin(0.0).setDepth(-1)
             .setInteractive().on('pointerup', () => {
-                console.log("x:", this.input.x, "y:", this.input.y)
             });
         //buttons:
         //Pause buttons:
@@ -215,13 +214,11 @@ class Scene1 extends Phaser.Scene {
         }
 
         if (randomNum == 5 && !this.turn) {
-            console.log("Here");
             this.turnAround();
         }
 
         // Catch by teacher
         if (watch == true && this.fire == true) {
-            console.log('Warnning')
             this.warn += 1;
 
             if (this.warn >= 3) {
@@ -242,12 +239,12 @@ class Scene1 extends Phaser.Scene {
         } else if (this.temper == 7) {
             this.warn += 1;
             this.temper += 1;
-            console.log('Warnning')
+            // console.log('Warnning')
             this.turnAround();
         } else if (this.temper == 3) {
             this.temper += 1;
             this.warn += 1;
-            console.log('Warnning')
+            // console.log('Warnning')
             this.turnAround();
         }
 
@@ -274,7 +271,7 @@ class Scene1 extends Phaser.Scene {
 
 
                 indoor = true;
-                console.log('Yu Men')
+                // console.log('Yu Men')
                 this.temper += 1;
                 this.time.delayedCall(2000, () => {
                     this.student.setAlpha(0.0);
@@ -295,7 +292,7 @@ class Scene1 extends Phaser.Scene {
                     this.sound.play("goal1", { volume: 2.0 });
                 }
                 this.ScoreText.setText('Score: ' + this.score + ' / 10');
-                console.log(this.score);
+                // console.log(this.score);
                 this.checker.disableBody();
             }, null, this);
 

@@ -15,7 +15,7 @@ class Menu extends Phaser.Scene {
         this.events.on('resume', () => { this.bgm2.play() });
         
         //The Play Button
-        this.input.setDefaultCursor('url(/assets/image/hand.png), pointer');
+        this.input.setDefaultCursor('url(/assets/image/artHand.png), pointer');
         const { width, height } = this.scale
         const playButton = this.add.image(width * 0.5, height * 0.75, 'playButton')
             .setDisplaySize(170, 90).setInteractive()
@@ -77,7 +77,7 @@ class Menu2 extends Phaser.Scene {
         // this.add.text(centerX, centerY - 100, 'Loafing Time', menuConfig).setOrigin(0.5);
 
         //place cursor
-        this.input.setDefaultCursor('url(/assets/image/hand.png), pointer');
+        this.input.setDefaultCursor('url(/assets/image/artHand.png), pointer');
         // play Kindergarten Level button
         const kingarButton = this.add.image(centerX, centerY + 50, 'kindergartenButton')
             .setDisplaySize(128, 44).setInteractive()
