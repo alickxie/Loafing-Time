@@ -6,8 +6,8 @@ class Victory extends Phaser.Scene {
     create() {
         let creditConfig = {
             color: '#CD00CD',
-            fontFamily: 'Pangolin',
-            fontSize: '22px',
+            fontFamily: 'Minecraftia',
+            fontSize: '30px',
             stroke: '#FFFFFF',
             strokeThickness: 3,
             align: 'left',
@@ -48,15 +48,15 @@ class Victory extends Phaser.Scene {
         if(mean<=20){
             this.back = this.add.sprite(0,0,'end1').setOrigin(0,0);
             this.back.anims.play('end');
-            this.add.text(centerX, 350, '[ You Are A cooporate-slave]', creditConfig).setOrigin(0.5);
+            this.add.text(centerX, 350, '[ You  Are  A  cooporate-slave]', creditConfig).setOrigin(0.5);
         }else if(mean>20 && mean<=70){
             this.back = this.add.sprite(0,0,'normal').setOrigin(0,0);
             this.back.anims.play('normal');
-            this.add.text(centerX, 350, '[ You Are Just A Normal]', creditConfig).setOrigin(0.5);
+            this.add.text(centerX, 350, '[ You  Are  Just  A  Normal]', creditConfig).setOrigin(0.5);
         }else if(mean>70 && mean<=105){
             this.back = this.add.sprite(0,0,'loafing_God').setOrigin(0,0);
             this.back.anims.play('loafing_God');
-            this.add.text(centerX, 350, '[ You Are THE LOOOAFING GOD!!!]', creditConfig).setOrigin(0.5);
+            this.add.text(centerX, 200, '[ You  Are  THE  LOOOAFING  GOD!!!]', creditConfig).setOrigin(0.5);
         }
        
 
@@ -76,9 +76,9 @@ class Victory extends Phaser.Scene {
             });
 
         creditConfig = {
-            color: '#CD00CD',
-            fontFamily: 'Pangolin',
-            fontSize: '50px',
+            color: '#AABB00',
+            fontFamily: 'Minecraftia',
+            fontSize: '25px',
             stroke: '#FFFFFF',
             strokeThickness: 3,
             align: 'left',
